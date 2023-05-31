@@ -1,0 +1,37 @@
+build:
+  maxIssues: 0
+
+config:
+  validation: true
+
+complexity:
+  active: true
+  LongParameterList:
+    active: true
+    ignoreAnnotated: [ 'Composable' ]
+    ignoreDefaultParameters: true
+  LongMethod:
+    active: true
+    ignoreAnnotated: [ 'Composable' ]
+
+naming:
+  active: true
+  FunctionNaming:
+    active: true
+    ignoreAnnotated: [ 'Composable' ]
+  TopLevelPropertyNaming:
+    active: false # compose style: PascalCase, kotlin style: SCREAMING_SNAKE_CASE
+  MatchingDeclarationName:
+    active: false
+
+style:
+  active: true
+  MagicNumber:
+    active: true
+    ignorePropertyDeclaration: true
+    ignoreCompanionObjectPropertyDeclaration: true
+  UnusedPrivateMember:
+    active: true
+    ignoreAnnotated: [ 'preview' ]
+  WildcardImport:
+    active: false
