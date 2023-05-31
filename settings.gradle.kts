@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "tiktok"
 include(":app")
+include(":data")
+include(":domain")
