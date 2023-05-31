@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.tiktok.ui.theme.ButtonBorderColor
@@ -51,6 +52,7 @@ fun AuthButton(
                 .weight(1f)
                 .offset(-(Sizes.IconSize / 2)),
             textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold)
         )
     }
 
