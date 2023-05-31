@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,7 +28,17 @@ import com.example.tiktok.ui.components.AuthButton
 import com.example.tiktok.ui.theme.TiktokTheme
 
 @Composable
-fun SignUpScreen() {
+fun SignUpRoute(
+    navigateToLogin: () -> Unit
+) {
+    SignUpScreen(
+        navigateToLogin = navigateToLogin
+    )
+}
+@Composable
+private fun SignUpScreen(
+    navigateToLogin: () -> Unit
+) {
     Scaffold(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.background),
@@ -43,11 +54,12 @@ fun SignUpScreen() {
                     "Already have an account?",
                     style = MaterialTheme.typography.bodyMedium
                 )
-                Spacer(modifier = Modifier.width(5.dp))
-                Text(
-                    "Log in",
-                    style = MaterialTheme.typography.bodyMedium.copy(color = Color.Red)
-                )
+                TextButton(onClick = navigateToLogin) {
+                    Text(
+                        "Log in",
+                        style = MaterialTheme.typography.bodyMedium.copy(color = Color.Red)
+                    )
+                }
             }
         }
     ) { paddingValues ->
@@ -93,6 +105,8 @@ fun SignUpScreen() {
 @Composable
 fun SignUpScreenPreview() {
     TiktokTheme {
-        SignUpScreen()
+        SignUpScreen(
+            navigateToLogin = {}
+        )
     }
 }
