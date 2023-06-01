@@ -28,10 +28,12 @@ import com.example.tiktok.ui.theme.Black54
 fun UserNameRoute(
     navigateBack: () -> Unit,
     navigateToEmail: (userName: String) -> Unit,
+    viewModel: SignUpFormViewModel
 ) {
     UserNameScreen(
         navigateBack = navigateBack,
-        navigateToEmail = navigateToEmail
+        navigateToEmail = navigateToEmail,
+        submit = viewModel::submitUserName
     )
 }
 
@@ -39,6 +41,7 @@ fun UserNameRoute(
 private fun UserNameScreen(
     navigateBack: () -> Unit,
     navigateToEmail: (userName: String) -> Unit,
+    submit: (userName: String) -> Unit
 ) {
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
@@ -91,6 +94,7 @@ private fun UserNameScreen(
             BasicButton(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
+                    submit(textFieldValue.value.text)
                     navigateToEmail(textFieldValue.value.text)
                 },
                 enabled = true,

@@ -1,5 +1,7 @@
 package com.example.tiktok.navigation
 
+import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
@@ -11,6 +13,7 @@ import com.example.tiktok.ui.authentication.signup.BirthdayRoute
 import com.example.tiktok.ui.authentication.signup.EmailRoute
 import com.example.tiktok.ui.authentication.signup.PasswordRoute
 import com.example.tiktok.ui.authentication.signup.SignUpRoute
+import com.example.tiktok.ui.authentication.signup.SignUpFormViewModel
 import com.example.tiktok.ui.authentication.signup.UserNameRoute
 
 const val AuthGraphRoute = "auth_graph"
@@ -33,24 +36,18 @@ fun NavGraphBuilder.addAuthNavGraph(
             route = SignUpNavRoute
         ) {
             SignUpRoute(
-                navigateToLogin = {
-                    navController.navigateToLogin()
-                },
-                navigateToUserName = {
-                    navController.navigateToUserName()
-                }
+                navigateToLogin = navController::navigateToLogin,
+                navigateToUserName = navController::navigateToUserName,
             )
         }
         composable(
             route = UserNameNavRoute
         ) {
+            val viewModel = hiltViewModel<SignUpFormViewModel>()
             UserNameRoute(
-                navigateBack = {
-                    navController.popBackStack()
-                },
-                navigateToEmail = { userName ->
-                    navController.navigateToEmail(userName)
-                }
+                navigateBack = navController::popBackStack,
+                navigateToEmail = navController::navigateToEmail,
+                viewModel = viewModel
             )
         }
         composable(
@@ -59,44 +56,37 @@ fun NavGraphBuilder.addAuthNavGraph(
         ) { backStackEntry ->
             val userName = backStackEntry.arguments?.getString(UserNameArgId)
             checkNotNull(userName)
+            val parentEntry = remember(backStackEntry) {
+                navController.getBackStackEntry(UserNameNavRoute)
+            }
+            val viewModel = hiltViewModel<SignUpFormViewModel>(parentEntry)
             EmailRoute(
-                navigateBack = {
-                    navController.popBackStack()
-                },
-                navigateToPassword = {
-                    navController.navigateToPassword()
-                },
-                userName = userName
+                navigateBack = navController::popBackStack,
+                navigateToPassword = navController::navigateToPassword,
+                userName = userName,
+                viewModel = viewModel
             )
         }
         composable(
             route = PasswordNavRoute
         ) {
             PasswordRoute(
-                navigateBack = {
-                    navController.popBackStack()
-                },
-                navigateToBirthday = {
-                    navController.navigateToBirthday()
-                }
+                navigateBack = navController::popBackStack,
+                navigateToBirthday = navController::navigateToBirthday
             )
         }
         composable(
             route = BirthdayNavRoute
         ) {
             BirthdayRoute(
-                navigateBack = {
-                    navController.popBackStack()
-                }
+                navigateBack = navController::popBackStack
             )
         }
         composable(
             route = LoginNavRoute
         ) {
             LoginRoute(
-                navigateToSignUp = {
-                    navController.popBackStack()
-                }
+                navigateToSignUp = navController::popBackStack
             )
         }
     }

@@ -11,6 +11,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -26,11 +28,13 @@ fun EmailRoute(
     navigateBack: () -> Unit,
     navigateToPassword: () -> Unit,
     userName: String,
+    viewModel: SignUpFormViewModel
 ) {
     EmailScreen(
         navigateBack = navigateBack,
         navigateToPassword = navigateToPassword,
-        userName = userName
+        userName = userName,
+        submit = viewModel::submitEmail
     )
 }
 
@@ -39,6 +43,7 @@ private fun EmailScreen(
     navigateBack: () -> Unit,
     navigateToPassword: () -> Unit,
     userName: String,
+    submit: (email: String) -> Unit
 ) {
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
@@ -59,6 +64,9 @@ private fun EmailScreen(
                     top = 80.dp
                 ),
         ) {
+            val textFieldValue = remember {
+                mutableStateOf(TextFieldValue())
+            }
             Spacer(modifier = Modifier.height(20.dp))
             Text(
                 text = "What is your email, $userName?",
@@ -69,14 +77,17 @@ private fun EmailScreen(
             )
             Spacer(modifier = Modifier.height(30.dp))
             UnderlineTextField(
-                textFieldValue = TextFieldValue(),
-                onValueChange = {},
+                textFieldValue = textFieldValue.value,
+                onValueChange = {
+                    textFieldValue.value = it
+                },
                 hintText = "Email"
             )
             Spacer(modifier = Modifier.height(20.dp))
             BasicButton(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
+                    submit(textFieldValue.value.text)
                     navigateToPassword()
                 },
                 enabled = true,
