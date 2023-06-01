@@ -4,8 +4,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.example.tiktok.ui.authentication.LoginRoute
-import com.example.tiktok.ui.authentication.SignUpRoute
+import com.example.tiktok.ui.authentication.login.LoginRoute
+import com.example.tiktok.ui.authentication.signup.SignUpRoute
 
 const val AuthGraphRoute = "auth_graph"
 const val SignUpNavRoute = "signup"
@@ -23,7 +23,6 @@ fun NavGraphBuilder.addAuthNavGraph(
         ) {
             SignUpRoute(
                 navigateToLogin = {
-                    navController.popBackStack()
                     navController.navigate(LoginNavRoute)
                 }
             )
@@ -35,7 +34,6 @@ fun NavGraphBuilder.addAuthNavGraph(
             LoginRoute(
                 navigateToSignUp = {
                     navController.popBackStack()
-                    navController.navigate(SignUpNavRoute)
                 }
             )
         }

@@ -1,4 +1,4 @@
-package com.example.tiktok.ui.authentication
+package com.example.tiktok.ui.authentication.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -21,23 +20,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tiktok.R
 import com.example.tiktok.ui.components.AuthButton
-import com.example.tiktok.ui.theme.TiktokTheme
 
 @Composable
-fun SignUpRoute(
-    navigateToLogin: () -> Unit
+fun LoginRoute(
+    navigateToSignUp: () -> Unit,
 ) {
-    SignUpScreen(
-        navigateToLogin = navigateToLogin
+    LoginScreen(
+        navigateToSignUp = navigateToSignUp
     )
 }
+
 @Composable
-private fun SignUpScreen(
-    navigateToLogin: () -> Unit
+fun LoginScreen(
+    navigateToSignUp: () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier
@@ -51,12 +49,12 @@ private fun SignUpScreen(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    "Already have an account?",
+                    "Don't have an account?",
                     style = MaterialTheme.typography.bodyMedium
                 )
-                TextButton(onClick = navigateToLogin) {
+                TextButton(onClick = navigateToSignUp) {
                     Text(
-                        "Log in",
+                        "Sign up",
                         style = MaterialTheme.typography.bodyMedium.copy(color = Color.Red)
                     )
                 }
@@ -75,12 +73,12 @@ private fun SignUpScreen(
         ) {
             Spacer(modifier = Modifier.height(80.dp))
             Text(
-                text = "TikTok에 가입하세요",
+                text = "Log in to TikTok",
                 style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
             )
             Spacer(modifier = Modifier.height(20.dp))
             Text(
-                text = "Create a profile, follow other accounts, make your own videos, and more.",
+                text = "Manage your account, check notifications, comment on videos, and more.",
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
             )
@@ -99,14 +97,5 @@ private fun SignUpScreen(
 
         }
     }
-}
 
-@Preview
-@Composable
-fun SignUpScreenPreview() {
-    TiktokTheme {
-        SignUpScreen(
-            navigateToLogin = {}
-        )
-    }
 }
