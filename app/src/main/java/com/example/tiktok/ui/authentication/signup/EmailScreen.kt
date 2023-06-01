@@ -28,13 +28,14 @@ fun EmailRoute(
     navigateBack: () -> Unit,
     navigateToPassword: () -> Unit,
     userName: String,
-    viewModel: SignUpFormViewModel
+    viewModel: SignUpFormViewModel,
 ) {
     EmailScreen(
         navigateBack = navigateBack,
         navigateToPassword = navigateToPassword,
         userName = userName,
-        submit = viewModel::submitEmail
+        submit = viewModel::submitEmail,
+        validateEmail = viewModel::isEmailValid
     )
 }
 
@@ -43,7 +44,8 @@ private fun EmailScreen(
     navigateBack: () -> Unit,
     navigateToPassword: () -> Unit,
     userName: String,
-    submit: (email: String) -> Unit
+    submit: (email: String) -> Unit,
+    validateEmail: (email: String) -> Boolean,
 ) {
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
@@ -81,7 +83,9 @@ private fun EmailScreen(
                 onValueChange = {
                     textFieldValue.value = it
                 },
-                hintText = "Email"
+                hintText = "Email",
+                isValidate = validateEmail(textFieldValue.value.text),
+                errorMessage = "Email not valid"
             )
             Spacer(modifier = Modifier.height(20.dp))
             BasicButton(

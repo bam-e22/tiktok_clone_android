@@ -78,7 +78,7 @@ private fun UserNameScreen(
                 text = "You can always change this later.",
                 style = MaterialTheme.typography.bodyLarge
                     .copy(
-                        fontWeight = FontWeight.Bold,
+                        fontWeight = FontWeight.SemiBold,
                         color = Black54
                     ),
             )

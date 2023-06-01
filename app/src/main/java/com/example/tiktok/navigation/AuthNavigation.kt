@@ -69,17 +69,27 @@ fun NavGraphBuilder.addAuthNavGraph(
         }
         composable(
             route = PasswordNavRoute
-        ) {
+        ) {backStackEntry ->
+            val parentEntry = remember(backStackEntry) {
+                navController.getBackStackEntry(UserNameNavRoute)
+            }
+            val viewModel = hiltViewModel<SignUpFormViewModel>(parentEntry)
             PasswordRoute(
                 navigateBack = navController::popBackStack,
-                navigateToBirthday = navController::navigateToBirthday
+                navigateToBirthday = navController::navigateToBirthday,
+                viewModel = viewModel
             )
         }
         composable(
             route = BirthdayNavRoute
-        ) {
+        ) {backStackEntry ->
+            val parentEntry = remember(backStackEntry) {
+                navController.getBackStackEntry(UserNameNavRoute)
+            }
+            val viewModel = hiltViewModel<SignUpFormViewModel>(parentEntry)
             BirthdayRoute(
-                navigateBack = navController::popBackStack
+                navigateBack = navController::popBackStack,
+                viewModel = viewModel
             )
         }
         composable(

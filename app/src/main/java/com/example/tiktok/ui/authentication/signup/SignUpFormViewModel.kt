@@ -13,6 +13,12 @@ private const val BIRTHDAY_KEY = "birthday"
 @HiltViewModel
 class SignUpFormViewModel @Inject constructor() : ViewModel() {
     private val signUpForm = mutableMapOf<String, String>()
+    private val emailRegex =
+        "[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?".toRegex()
+
+    fun isEmailValid(email: String): Boolean {
+        return emailRegex.matches(email)
+    }
 
     fun submitUserName(value: String) {
         signUpForm[USER_NAME_KEY] = value

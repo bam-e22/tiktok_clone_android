@@ -30,18 +30,21 @@ import com.example.tiktok.ui.utils.Sizes
 @Composable
 fun PasswordRoute(
     navigateBack: () -> Unit,
-    navigateToBirthday: () -> Unit
+    navigateToBirthday: () -> Unit,
+    viewModel: SignUpFormViewModel,
 ) {
     PasswordScreen(
         navigateBack = navigateBack,
         navigateToBirthday = navigateToBirthday,
+        submit = viewModel::submitPassword
     )
 }
 
 @Composable
 private fun PasswordScreen(
     navigateBack: () -> Unit,
-    navigateToBirthday: () -> Unit
+    navigateToBirthday: () -> Unit,
+    submit: (password: String) -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
