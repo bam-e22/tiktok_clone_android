@@ -2,18 +2,21 @@ package com.example.tiktok.ui.authentication.signup
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
@@ -22,23 +25,23 @@ import com.example.tiktok.R
 import com.example.tiktok.ui.components.BasicButton
 import com.example.tiktok.ui.components.TikTokTopAppBar
 import com.example.tiktok.ui.components.UnderlineTextField
-import com.example.tiktok.ui.theme.Black54
+import com.example.tiktok.ui.utils.Sizes
 
 @Composable
-fun UserNameRoute(
+fun PasswordRoute(
     navigateBack: () -> Unit,
-    navigateToEmail: (userName: String) -> Unit,
+    navigateToBirthday: () -> Unit
 ) {
-    UserNameScreen(
+    PasswordScreen(
         navigateBack = navigateBack,
-        navigateToEmail = navigateToEmail
+        navigateToBirthday = navigateToBirthday,
     )
 }
 
 @Composable
-private fun UserNameScreen(
+private fun PasswordScreen(
     navigateBack: () -> Unit,
-    navigateToEmail: (userName: String) -> Unit,
+    navigateToBirthday: () -> Unit
 ) {
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
@@ -59,40 +62,45 @@ private fun UserNameScreen(
                     top = 80.dp
                 ),
         ) {
-            val textFieldValue = remember {
-                mutableStateOf(TextFieldValue())
-            }
             Spacer(modifier = Modifier.height(20.dp))
             Text(
-                text = "Create user name",
+                text = "Password",
                 style = MaterialTheme.typography.headlineMedium
                     .copy(
                         fontWeight = FontWeight.Bold
                     ),
             )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "You can always change this later.",
-                style = MaterialTheme.typography.bodyLarge
-                    .copy(
-                        fontWeight = FontWeight.Bold,
-                        color = Black54
-                    ),
-            )
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(30.dp))
             UnderlineTextField(
-                textFieldValue = textFieldValue.value,
-                onValueChange = {
-                    textFieldValue.value = it
-                },
-                hintText = "User name"
+                textFieldValue = TextFieldValue(),
+                onValueChange = {},
+                hintText = "Make it strong!"
             )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                "Your password must have: ",
+                style = MaterialTheme.typography.labelLarge
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Row {
+                Icon(
+                    modifier = Modifier.size(Sizes.extraSmallIconSize),
+                    painter = painterResource(id = R.drawable.circle_check),
+                    contentDescription = null,
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+                Text(
+                    "8 to 20 characters",
+                    style = MaterialTheme.typography.labelLarge
+                        .copy(
+                            fontWeight = FontWeight.Normal
+                        )
+                )
+            }
             Spacer(modifier = Modifier.height(20.dp))
             BasicButton(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = {
-                    navigateToEmail(textFieldValue.value.text)
-                },
+                onClick = navigateToBirthday,
                 enabled = true,
                 text = "Next"
             )

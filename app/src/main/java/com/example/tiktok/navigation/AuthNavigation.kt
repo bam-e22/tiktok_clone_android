@@ -2,9 +2,14 @@ package com.example.tiktok.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.example.tiktok.ui.authentication.login.LoginRoute
+import com.example.tiktok.ui.authentication.signup.BirthdayRoute
+import com.example.tiktok.ui.authentication.signup.EmailRoute
+import com.example.tiktok.ui.authentication.signup.PasswordRoute
 import com.example.tiktok.ui.authentication.signup.SignUpRoute
 import com.example.tiktok.ui.authentication.signup.UserNameRoute
 
@@ -12,6 +17,10 @@ const val AuthGraphRoute = "auth_graph"
 const val SignUpNavRoute = "signup"
 const val LoginNavRoute = "login"
 const val UserNameNavRoute = "username"
+const val UserNameArgId = "username"
+const val EmailNavRoute = "email/{$UserNameArgId}"
+const val PasswordNavRoute = "password"
+const val BirthdayNavRoute = "birthday"
 
 fun NavGraphBuilder.addAuthNavGraph(
     navController: NavController,
@@ -25,10 +34,10 @@ fun NavGraphBuilder.addAuthNavGraph(
         ) {
             SignUpRoute(
                 navigateToLogin = {
-                    navController.navigate(LoginNavRoute)
+                    navController.navigateToLogin()
                 },
                 navigateToUserName = {
-                    navController.navigate(UserNameNavRoute)
+                    navController.navigateToUserName()
                 }
             )
         }
@@ -36,6 +45,46 @@ fun NavGraphBuilder.addAuthNavGraph(
             route = UserNameNavRoute
         ) {
             UserNameRoute(
+                navigateBack = {
+                    navController.popBackStack()
+                },
+                navigateToEmail = { userName ->
+                    navController.navigateToEmail(userName)
+                }
+            )
+        }
+        composable(
+            route = EmailNavRoute,
+            arguments = listOf(navArgument(UserNameArgId) { type = NavType.StringType })
+        ) { backStackEntry ->
+            val userName = backStackEntry.arguments?.getString(UserNameArgId)
+            checkNotNull(userName)
+            EmailRoute(
+                navigateBack = {
+                    navController.popBackStack()
+                },
+                navigateToPassword = {
+                    navController.navigateToPassword()
+                },
+                userName = userName
+            )
+        }
+        composable(
+            route = PasswordNavRoute
+        ) {
+            PasswordRoute(
+                navigateBack = {
+                    navController.popBackStack()
+                },
+                navigateToBirthday = {
+                    navController.navigateToBirthday()
+                }
+            )
+        }
+        composable(
+            route = BirthdayNavRoute
+        ) {
+            BirthdayRoute(
                 navigateBack = {
                     navController.popBackStack()
                 }
@@ -51,4 +100,24 @@ fun NavGraphBuilder.addAuthNavGraph(
             )
         }
     }
+}
+
+fun NavController.navigateToLogin() {
+    navigate(LoginNavRoute)
+}
+
+fun NavController.navigateToUserName() {
+    navigate(UserNameNavRoute)
+}
+
+fun NavController.navigateToEmail(userName: String) {
+    navigate("email/$userName")
+}
+
+fun NavController.navigateToPassword() {
+    navigate(PasswordNavRoute)
+}
+
+fun NavController.navigateToBirthday() {
+    navigate(BirthdayNavRoute)
 }

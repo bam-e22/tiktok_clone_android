@@ -11,8 +11,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -22,23 +20,25 @@ import com.example.tiktok.R
 import com.example.tiktok.ui.components.BasicButton
 import com.example.tiktok.ui.components.TikTokTopAppBar
 import com.example.tiktok.ui.components.UnderlineTextField
-import com.example.tiktok.ui.theme.Black54
 
 @Composable
-fun UserNameRoute(
+fun EmailRoute(
     navigateBack: () -> Unit,
-    navigateToEmail: (userName: String) -> Unit,
+    navigateToPassword: () -> Unit,
+    userName: String,
 ) {
-    UserNameScreen(
+    EmailScreen(
         navigateBack = navigateBack,
-        navigateToEmail = navigateToEmail
+        navigateToPassword = navigateToPassword,
+        userName = userName
     )
 }
 
 @Composable
-private fun UserNameScreen(
+private fun EmailScreen(
     navigateBack: () -> Unit,
-    navigateToEmail: (userName: String) -> Unit,
+    navigateToPassword: () -> Unit,
+    userName: String,
 ) {
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
@@ -59,39 +59,25 @@ private fun UserNameScreen(
                     top = 80.dp
                 ),
         ) {
-            val textFieldValue = remember {
-                mutableStateOf(TextFieldValue())
-            }
             Spacer(modifier = Modifier.height(20.dp))
             Text(
-                text = "Create user name",
+                text = "What is your email, $userName?",
                 style = MaterialTheme.typography.headlineMedium
                     .copy(
                         fontWeight = FontWeight.Bold
                     ),
             )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "You can always change this later.",
-                style = MaterialTheme.typography.bodyLarge
-                    .copy(
-                        fontWeight = FontWeight.Bold,
-                        color = Black54
-                    ),
-            )
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(30.dp))
             UnderlineTextField(
-                textFieldValue = textFieldValue.value,
-                onValueChange = {
-                    textFieldValue.value = it
-                },
-                hintText = "User name"
+                textFieldValue = TextFieldValue(),
+                onValueChange = {},
+                hintText = "Email"
             )
             Spacer(modifier = Modifier.height(20.dp))
             BasicButton(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    navigateToEmail(textFieldValue.value.text)
+                    navigateToPassword()
                 },
                 enabled = true,
                 text = "Next"
