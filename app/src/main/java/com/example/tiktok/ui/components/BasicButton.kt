@@ -16,7 +16,7 @@ fun BasicButton(
 ) {
     FilledTonalButton(
         modifier = modifier,
-        onClick = onClick,
+        onClick = if (enabled) onClick else ({}),
         enabled = enabled,
         colors = ButtonDefaults.filledTonalButtonColors(
             containerColor = MaterialTheme.colorScheme.primary,

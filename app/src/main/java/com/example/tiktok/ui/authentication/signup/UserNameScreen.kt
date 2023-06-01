@@ -11,8 +11,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -62,7 +64,7 @@ private fun UserNameScreen(
                     top = 80.dp
                 ),
         ) {
-            val textFieldValue = remember {
+            var textFieldValue by remember {
                 mutableStateOf(TextFieldValue())
             }
             Spacer(modifier = Modifier.height(20.dp))
@@ -84,9 +86,9 @@ private fun UserNameScreen(
             )
             Spacer(modifier = Modifier.height(24.dp))
             UnderlineTextField(
-                textFieldValue = textFieldValue.value,
+                textFieldValue = textFieldValue,
                 onValueChange = {
-                    textFieldValue.value = it
+                    textFieldValue = it
                 },
                 hintText = "User name"
             )
@@ -94,10 +96,10 @@ private fun UserNameScreen(
             BasicButton(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    submit(textFieldValue.value.text)
-                    navigateToEmail(textFieldValue.value.text)
+                    submit(textFieldValue.text)
+                    navigateToEmail(textFieldValue.text)
                 },
-                enabled = true,
+                enabled = textFieldValue.text.isNotEmpty(),
                 text = "Next"
             )
         }

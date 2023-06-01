@@ -20,6 +20,10 @@ class SignUpFormViewModel @Inject constructor() : ViewModel() {
         return emailRegex.matches(email)
     }
 
+    fun isPasswordValid(password: String): Boolean {
+        return password.length >= 8
+    }
+
     fun submitUserName(value: String) {
         signUpForm[USER_NAME_KEY] = value
         Timber.tag(TAG).d("signUpForm= $signUpForm")

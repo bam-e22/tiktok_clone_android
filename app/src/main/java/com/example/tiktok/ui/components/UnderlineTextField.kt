@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import com.example.tiktok.ui.theme.GreyShade400
+import com.example.tiktok.ui.theme.Grey400
 
 @Composable
 fun UnderlineTextField(
@@ -41,7 +41,7 @@ fun UnderlineTextField(
                     drawContent()
                     drawLine(
                         color = if (textFieldValue.text.isEmpty() || isValidate == null || isValidate) {
-                            GreyShade400
+                            Grey400
                         } else {
                             Color.Red
                         },

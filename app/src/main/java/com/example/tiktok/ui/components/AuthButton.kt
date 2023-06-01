@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.tiktok.ui.theme.GreyShade400
+import com.example.tiktok.ui.theme.Grey400
 import com.example.tiktok.ui.utils.Sizes
 
 @Composable
@@ -37,7 +37,7 @@ fun AuthButton(
         ),
         border = BorderStroke(
             width = 1.dp,
-            color = GreyShade400,
+            color = Grey400,
         ),
         onClick = onClick,
     ) {

@@ -15,7 +15,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -25,6 +30,8 @@ import com.example.tiktok.R
 import com.example.tiktok.ui.components.BasicButton
 import com.example.tiktok.ui.components.TikTokTopAppBar
 import com.example.tiktok.ui.components.UnderlineTextField
+import com.example.tiktok.ui.theme.Green500
+import com.example.tiktok.ui.theme.Grey400
 import com.example.tiktok.ui.utils.Sizes
 
 @Composable
@@ -36,7 +43,8 @@ fun PasswordRoute(
     PasswordScreen(
         navigateBack = navigateBack,
         navigateToBirthday = navigateToBirthday,
-        submit = viewModel::submitPassword
+        submit = viewModel::submitPassword,
+        validatePassword = viewModel::isPasswordValid
     )
 }
 
@@ -45,6 +53,7 @@ private fun PasswordScreen(
     navigateBack: () -> Unit,
     navigateToBirthday: () -> Unit,
     submit: (password: String) -> Unit,
+    validatePassword: (password: String) -> Boolean,
 ) {
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
@@ -55,6 +64,9 @@ private fun PasswordScreen(
             )
         }
     ) { paddingValues ->
+        var textFieldValue by remember {
+            mutableStateOf(TextFieldValue())
+        }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -75,8 +87,11 @@ private fun PasswordScreen(
             )
             Spacer(modifier = Modifier.height(30.dp))
             UnderlineTextField(
-                textFieldValue = TextFieldValue(),
-                onValueChange = {},
+                textFieldValue = textFieldValue,
+                onValueChange = {
+                    textFieldValue = it
+                    submit(textFieldValue.text)
+                },
                 hintText = "Make it strong!"
             )
             Spacer(modifier = Modifier.height(10.dp))
@@ -90,6 +105,7 @@ private fun PasswordScreen(
                     modifier = Modifier.size(Sizes.extraSmallIconSize),
                     painter = painterResource(id = R.drawable.circle_check),
                     contentDescription = null,
+                    tint = if (validatePassword(textFieldValue.text)) Green500 else Grey400
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
@@ -104,7 +120,7 @@ private fun PasswordScreen(
             BasicButton(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = navigateToBirthday,
-                enabled = true,
+                enabled = validatePassword(textFieldValue.text),
                 text = "Next"
             )
         }
