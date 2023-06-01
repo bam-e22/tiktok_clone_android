@@ -67,11 +67,11 @@ fun LoginScreen(
                 .padding(
                     bottom = paddingValues.calculateBottomPadding(),
                     start = 40.dp,
-                    end = 40.dp
+                    end = 40.dp,
+                    top = 80.dp
                 ),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Spacer(modifier = Modifier.height(80.dp))
             Text(
                 text = "Log in to TikTok",
                 style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),

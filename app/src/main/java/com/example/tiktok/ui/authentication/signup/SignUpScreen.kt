@@ -29,15 +29,18 @@ import com.example.tiktok.ui.theme.TiktokTheme
 @Composable
 fun SignUpRoute(
     navigateToLogin: () -> Unit,
+    navigateToUserName: () -> Unit,
 ) {
     SignUpScreen(
-        navigateToLogin = navigateToLogin
+        navigateToLogin = navigateToLogin,
+        navigateToUserName = navigateToUserName
     )
 }
 
 @Composable
 private fun SignUpScreen(
     navigateToLogin: () -> Unit,
+    navigateToUserName: () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier
@@ -69,11 +72,11 @@ private fun SignUpScreen(
                 .padding(
                     bottom = paddingValues.calculateBottomPadding(),
                     start = 40.dp,
-                    end = 40.dp
+                    end = 40.dp,
+                    top = 80.dp
                 ),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Spacer(modifier = Modifier.height(80.dp))
             Text(
                 text = "TikTok에 가입하세요",
                 style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
@@ -88,7 +91,7 @@ private fun SignUpScreen(
             AuthButton(
                 painter = painterResource(id = R.drawable.user),
                 text = "Use email & password",
-                onClick = { }
+                onClick = navigateToUserName
             )
             Spacer(modifier = Modifier.height(16.dp))
             AuthButton(
@@ -96,7 +99,6 @@ private fun SignUpScreen(
                 text = "Continue with Github",
                 onClick = { }
             )
-
         }
     }
 }
@@ -106,7 +108,8 @@ private fun SignUpScreen(
 fun SignUpScreenPreview() {
     TiktokTheme {
         SignUpScreen(
-            navigateToLogin = {}
+            navigateToLogin = {},
+            navigateToUserName = {}
         )
     }
 }

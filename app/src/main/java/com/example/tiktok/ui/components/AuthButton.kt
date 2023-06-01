@@ -44,13 +44,13 @@ fun AuthButton(
         Icon(
             painter = painter,
             contentDescription = null,
-            modifier = Modifier.size(Sizes.IconSize)
+            modifier = Modifier.size(Sizes.SmallIconSize)
         )
         Text(
             text,
             modifier = Modifier
                 .weight(1f)
-                .offset(-(Sizes.IconSize / 2)),
+                .offset(-(Sizes.SmallIconSize / 2)),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold)
         )
