@@ -23,14 +23,17 @@ import com.example.tiktok.ui.theme.Grey400
 
 @Composable
 fun UnderlineTextField(
+    modifier: Modifier = Modifier,
     textFieldValue: TextFieldValue,
     onValueChange: (TextFieldValue) -> Unit,
     hintText: String,
     isValidate: Boolean? = null,
     errorMessage: String? = null,
+    enabled: Boolean = true,
 ) {
     BasicTextField(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
+        enabled = enabled,
         value = textFieldValue,
         onValueChange = onValueChange,
         textStyle = MaterialTheme.typography.labelLarge,

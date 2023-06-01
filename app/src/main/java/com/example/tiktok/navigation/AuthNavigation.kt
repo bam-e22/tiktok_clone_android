@@ -12,8 +12,8 @@ import com.example.tiktok.ui.authentication.login.LoginRoute
 import com.example.tiktok.ui.authentication.signup.BirthdayRoute
 import com.example.tiktok.ui.authentication.signup.EmailRoute
 import com.example.tiktok.ui.authentication.signup.PasswordRoute
-import com.example.tiktok.ui.authentication.signup.SignUpRoute
 import com.example.tiktok.ui.authentication.signup.SignUpFormViewModel
+import com.example.tiktok.ui.authentication.signup.SignUpRoute
 import com.example.tiktok.ui.authentication.signup.UserNameRoute
 
 const val AuthGraphRoute = "auth_graph"
@@ -69,7 +69,7 @@ fun NavGraphBuilder.addAuthNavGraph(
         }
         composable(
             route = PasswordNavRoute
-        ) {backStackEntry ->
+        ) { backStackEntry ->
             val parentEntry = remember(backStackEntry) {
                 navController.getBackStackEntry(UserNameNavRoute)
             }
@@ -82,7 +82,7 @@ fun NavGraphBuilder.addAuthNavGraph(
         }
         composable(
             route = BirthdayNavRoute
-        ) {backStackEntry ->
+        ) { backStackEntry ->
             val parentEntry = remember(backStackEntry) {
                 navController.getBackStackEntry(UserNameNavRoute)
             }

@@ -58,10 +58,10 @@ private fun UserNameScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(
-                    bottom = paddingValues.calculateBottomPadding(),
+                    bottom = 40.dp,
                     start = 40.dp,
                     end = 40.dp,
-                    top = 80.dp
+                    top = paddingValues.calculateTopPadding() + 20.dp
                 ),
         ) {
             var textFieldValue by remember {

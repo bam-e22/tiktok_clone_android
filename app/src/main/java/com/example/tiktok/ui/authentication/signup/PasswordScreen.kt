@@ -20,7 +20,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -71,10 +70,10 @@ private fun PasswordScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(
-                    bottom = paddingValues.calculateBottomPadding(),
+                    bottom = 40.dp,
                     start = 40.dp,
                     end = 40.dp,
-                    top = 80.dp
+                    top = paddingValues.calculateTopPadding() + 20.dp
                 ),
         ) {
             Spacer(modifier = Modifier.height(20.dp))
