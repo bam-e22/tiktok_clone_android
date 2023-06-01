@@ -49,7 +49,8 @@ private fun SignUpScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 32.dp),
+                    .background(MaterialTheme.colorScheme.surface)
+                    .padding(top = 15.dp, bottom = 25.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -78,7 +79,7 @@ private fun SignUpScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = "TikTok에 가입하세요",
+                text = "Sign up for TikTok",
                 style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold),
             )
             Spacer(modifier = Modifier.height(20.dp))

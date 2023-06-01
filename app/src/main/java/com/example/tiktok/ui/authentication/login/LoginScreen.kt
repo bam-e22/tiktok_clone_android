@@ -44,7 +44,8 @@ fun LoginScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 32.dp),
+                    .background(MaterialTheme.colorScheme.surface)
+                    .padding(top = 15.dp, bottom = 25.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically,
             ) {
