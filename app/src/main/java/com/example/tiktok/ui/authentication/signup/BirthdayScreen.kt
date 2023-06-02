@@ -41,7 +41,8 @@ fun BirthdayRoute(
 ) {
     BirthdayScreen(
         navigateBack = navigateBack,
-        submit = viewModel::submitBirthday
+        submit = viewModel::submitBirthday,
+        signUp = viewModel::emailSignUp
     )
 }
 
@@ -50,6 +51,7 @@ fun BirthdayRoute(
 private fun BirthdayScreen(
     navigateBack: () -> Unit,
     submit: (birthday: String) -> Unit,
+    signUp: () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
@@ -113,6 +115,7 @@ private fun BirthdayScreen(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
                     submit(selectedDate)
+                    signUp()
                 },
                 enabled = true,
                 text = "Next"
