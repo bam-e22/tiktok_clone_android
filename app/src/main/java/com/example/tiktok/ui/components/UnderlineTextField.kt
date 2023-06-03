@@ -17,7 +17,9 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.tiktok.ui.theme.Grey400
 
@@ -30,6 +32,7 @@ fun UnderlineTextField(
     isValidate: Boolean? = null,
     errorMessage: String? = null,
     enabled: Boolean = true,
+    obscureText: Boolean = false,
 ) {
     BasicTextField(
         modifier = modifier.fillMaxWidth(),
@@ -39,6 +42,7 @@ fun UnderlineTextField(
         singleLine = true,
         textStyle = MaterialTheme.typography.labelLarge,
         cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
+        visualTransformation = if (obscureText) PasswordVisualTransformation() else VisualTransformation.None,
         decorationBox = { innerTextField ->
             Column(
                 modifier = Modifier.drawWithContent {

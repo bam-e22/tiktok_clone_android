@@ -92,7 +92,8 @@ private fun PasswordScreen(
                     textFieldValue = it
                     submit(textFieldValue.text)
                 },
-                hintText = "Make it strong!"
+                hintText = "Make it strong!",
+                obscureText = true
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(

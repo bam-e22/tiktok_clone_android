@@ -112,7 +112,8 @@ private fun LoginFormScreen(
                 },
                 hintText = "Password",
                 isValidate = validatePassword(passwordTextFieldValue.text),
-                errorMessage = "Password not valid"
+                errorMessage = "Password not valid",
+                obscureText = true
             )
             Spacer(modifier = Modifier.height(20.dp))
             BasicButton(
