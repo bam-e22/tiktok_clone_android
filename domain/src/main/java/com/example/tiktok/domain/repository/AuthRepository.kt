@@ -1,7 +1,8 @@
 package com.example.tiktok.domain.repository
 
-import com.example.tiktok.domain.model.SignUpModel
+import com.example.tiktok.domain.model.AuthFormModel
 
 interface AuthRepository {
-    suspend fun emailSignUp(signUpModel: SignUpModel)
+    suspend fun signUpWithEmail(authFormModel: AuthFormModel)
+    suspend fun signInWithEmail(authFormModel: AuthFormModel)
 }

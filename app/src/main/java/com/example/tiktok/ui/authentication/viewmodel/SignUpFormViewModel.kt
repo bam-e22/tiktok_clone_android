@@ -1,9 +1,11 @@
-package com.example.tiktok.ui.authentication.signup
+package com.example.tiktok.ui.authentication.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tiktok.domain.model.SignUpModel
-import com.example.tiktok.domain.usecase.EmailSignUpUseCase
+import com.example.tiktok.domain.delegate.InputFormValidationDelegate
+import com.example.tiktok.domain.delegate.InputFormValidationDelegateImpl
+import com.example.tiktok.domain.model.AuthFormModel
+import com.example.tiktok.domain.usecase.SignUpWithEmailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -19,22 +21,12 @@ private const val BIRTHDAY_KEY = "birthday"
 
 @HiltViewModel
 class SignUpFormViewModel @Inject constructor(
-    private val emailSignUpUseCase: EmailSignUpUseCase,
-) : ViewModel() {
+    private val signUpWithEmailUseCase: SignUpWithEmailUseCase,
+) : ViewModel(), InputFormValidationDelegate by InputFormValidationDelegateImpl() {
     private val _signUpUiEvent = MutableSharedFlow<SignUpUiEvent>()
     val signUpUiEvent: SharedFlow<SignUpUiEvent> = _signUpUiEvent.asSharedFlow()
 
     private val signUpForm = mutableMapOf<String, String>()
-    private val emailRegex =
-        "[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?".toRegex()
-
-    fun isEmailValid(email: String): Boolean {
-        return emailRegex.matches(email)
-    }
-
-    fun isPasswordValid(password: String): Boolean {
-        return password.length >= 8
-    }
 
     fun submitUserName(value: String) {
         signUpForm[USER_NAME_KEY] = value
@@ -57,7 +49,7 @@ class SignUpFormViewModel @Inject constructor(
         val password = checkNotNull(signUpForm[PASSWORD_KEY])
         viewModelScope.launch {
             runCatching {
-                emailSignUpUseCase(SignUpModel(email, password))
+                signUpWithEmailUseCase(AuthFormModel(email, password))
             }.onSuccess {
                 _signUpUiEvent.emit(SignUpUiEvent.SignUpSuccess)
             }.onFailure {

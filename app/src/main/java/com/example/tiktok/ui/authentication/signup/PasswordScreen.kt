@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.example.tiktok.R
+import com.example.tiktok.ui.authentication.viewmodel.SignUpFormViewModel
 import com.example.tiktok.ui.components.BasicButton
 import com.example.tiktok.ui.components.TikTokTopAppBar
 import com.example.tiktok.ui.components.UnderlineTextField

@@ -27,15 +27,18 @@ import com.example.tiktok.ui.components.AuthButton
 @Composable
 fun LoginRoute(
     navigateToSignUp: () -> Unit,
+    navigateToLoginForm: () -> Unit,
 ) {
     LoginScreen(
-        navigateToSignUp = navigateToSignUp
+        navigateToSignUp = navigateToSignUp,
+        navigateToLoginForm = navigateToLoginForm
     )
 }
 
 @Composable
 fun LoginScreen(
     navigateToSignUp: () -> Unit,
+    navigateToLoginForm: () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier
@@ -87,7 +90,7 @@ fun LoginScreen(
             AuthButton(
                 painter = painterResource(id = R.drawable.user),
                 text = "Use email & password",
-                onClick = { }
+                onClick = navigateToLoginForm
             )
             Spacer(modifier = Modifier.height(16.dp))
             AuthButton(

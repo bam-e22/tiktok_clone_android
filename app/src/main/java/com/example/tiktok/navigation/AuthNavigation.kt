@@ -8,22 +8,27 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
+import com.example.tiktok.ui.authentication.login.LoginFormRoute
 import com.example.tiktok.ui.authentication.login.LoginRoute
 import com.example.tiktok.ui.authentication.signup.BirthdayRoute
 import com.example.tiktok.ui.authentication.signup.EmailRoute
 import com.example.tiktok.ui.authentication.signup.PasswordRoute
-import com.example.tiktok.ui.authentication.signup.SignUpFormViewModel
 import com.example.tiktok.ui.authentication.signup.SignUpRoute
 import com.example.tiktok.ui.authentication.signup.UserNameRoute
+import com.example.tiktok.ui.authentication.viewmodel.LoginFormViewModel
+import com.example.tiktok.ui.authentication.viewmodel.SignUpFormViewModel
+import com.example.tiktok.ui.home.MainScreen
 
 const val AuthGraphRoute = "auth_graph"
 const val SignUpNavRoute = "signup"
-const val LoginNavRoute = "login"
 const val UserNameNavRoute = "username"
 const val UserNameArgId = "username"
 const val EmailNavRoute = "email/{$UserNameArgId}"
 const val PasswordNavRoute = "password"
 const val BirthdayNavRoute = "birthday"
+
+const val LoginNavRoute = "login"
+const val LoginFormNavRoute = "loginForm"
 
 fun NavGraphBuilder.addAuthNavGraph(
     navController: NavController,
@@ -97,8 +102,27 @@ fun NavGraphBuilder.addAuthNavGraph(
             route = LoginNavRoute
         ) {
             LoginRoute(
-                navigateToSignUp = navController::popBackStack
+                navigateToSignUp = navController::popBackStack,
+                navigateToLoginForm = navController::navigateToLoginForm
             )
+        }
+        composable(
+            route = LoginFormNavRoute
+        ) {
+            val viewModel = hiltViewModel<LoginFormViewModel>()
+            LoginFormRoute(
+                navigateBack = navController::popBackStack,
+                navigateToMain = {
+                    navController.navigate("Main") // TODO: for test
+                },
+                viewModel = viewModel
+            )
+        }
+        // TODO: for test
+        composable(
+            route = "Main"
+        ) {
+            MainScreen()
         }
     }
 }
@@ -125,4 +149,8 @@ fun NavController.navigateToBirthday() {
 
 fun NavController.navigateToOnboarding() {
     navigate(OnboardingGraphRoute)
+}
+
+fun NavController.navigateToLoginForm() {
+    navigate(LoginFormNavRoute)
 }
