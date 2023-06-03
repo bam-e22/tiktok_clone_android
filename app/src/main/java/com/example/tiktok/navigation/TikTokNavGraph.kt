@@ -8,8 +8,7 @@ import androidx.navigation.compose.rememberNavController
 @Composable
 fun TikTokNavGraph(
     navController: NavHostController = rememberNavController(),
-    //startDestination: String = AuthGraphRoute, // TODO: 메인 루트로 변경
-    startDestination: String = OnboardingGraphRoute
+    startDestination: String = AuthGraphRoute, // TODO: 메인 루트로 변경
 ) {
     NavHost(
         navController = navController,

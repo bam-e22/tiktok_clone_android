@@ -89,6 +89,7 @@ fun NavGraphBuilder.addAuthNavGraph(
             val viewModel = hiltViewModel<SignUpFormViewModel>(parentEntry)
             BirthdayRoute(
                 navigateBack = navController::popBackStack,
+                navigateToOnboarding = navController::navigateToOnboarding,
                 viewModel = viewModel
             )
         }
@@ -120,4 +121,8 @@ fun NavController.navigateToPassword() {
 
 fun NavController.navigateToBirthday() {
     navigate(BirthdayNavRoute)
+}
+
+fun NavController.navigateToOnboarding() {
+    navigate(OnboardingGraphRoute)
 }

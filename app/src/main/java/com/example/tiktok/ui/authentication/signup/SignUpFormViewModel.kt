@@ -5,6 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.tiktok.domain.model.SignUpModel
 import com.example.tiktok.domain.usecase.EmailSignUpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,6 +21,9 @@ private const val BIRTHDAY_KEY = "birthday"
 class SignUpFormViewModel @Inject constructor(
     private val emailSignUpUseCase: EmailSignUpUseCase,
 ) : ViewModel() {
+    private val _signUpUiEvent = MutableSharedFlow<SignUpUiEvent>()
+    val signUpUiEvent: SharedFlow<SignUpUiEvent> = _signUpUiEvent.asSharedFlow()
+
     private val signUpForm = mutableMapOf<String, String>()
     private val emailRegex =
         "[a-z0-9!#\$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#\$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?".toRegex()
@@ -53,9 +59,9 @@ class SignUpFormViewModel @Inject constructor(
             runCatching {
                 emailSignUpUseCase(SignUpModel(email, password))
             }.onSuccess {
-                // TODO: navigate to MainScreen
+                _signUpUiEvent.emit(SignUpUiEvent.SignUpSuccess)
             }.onFailure {
-                // TODO: show error toast
+                _signUpUiEvent.emit(SignUpUiEvent.SignUpFailure(it.message ?: "SignUpError"))
             }
         }
     }
@@ -63,6 +69,11 @@ class SignUpFormViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         Timber.tag(TAG).d("onCleared")
+    }
+
+    sealed interface SignUpUiEvent {
+        object SignUpSuccess : SignUpUiEvent
+        class SignUpFailure(val errorMessage: String) : SignUpUiEvent
     }
 
     companion object {

@@ -36,6 +36,7 @@ fun UnderlineTextField(
         enabled = enabled,
         value = textFieldValue,
         onValueChange = onValueChange,
+        singleLine = true,
         textStyle = MaterialTheme.typography.labelLarge,
         cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
         decorationBox = { innerTextField ->
