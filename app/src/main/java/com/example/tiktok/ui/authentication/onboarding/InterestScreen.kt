@@ -36,7 +36,7 @@ fun InterestRoute(
     navigateToTutorial: () -> Unit,
 ) {
     InterestScreen(
-        navigateToTutorial = {}
+        navigateToTutorial = navigateToTutorial
     )
 }
 
