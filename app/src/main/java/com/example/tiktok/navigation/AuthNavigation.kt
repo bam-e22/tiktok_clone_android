@@ -19,26 +19,15 @@ import com.example.tiktok.ui.authentication.viewmodel.LoginFormViewModel
 import com.example.tiktok.ui.authentication.viewmodel.SignUpFormViewModel
 import com.example.tiktok.ui.home.MainScreen
 
-const val AuthGraphRoute = "auth_graph"
-const val SignUpNavRoute = "signup"
-const val UserNameNavRoute = "username"
-const val UserNameArgId = "username"
-const val EmailNavRoute = "email/{$UserNameArgId}"
-const val PasswordNavRoute = "password"
-const val BirthdayNavRoute = "birthday"
-
-const val LoginNavRoute = "login"
-const val LoginFormNavRoute = "loginForm"
-
 fun NavGraphBuilder.addAuthNavGraph(
     navController: NavController,
 ) {
     navigation(
-        route = AuthGraphRoute,
-        startDestination = SignUpNavRoute
+        route = NavDestination.AuthGraph.route,
+        startDestination = NavDestination.AuthGraph.SignUp.route
     ) {
         composable(
-            route = SignUpNavRoute
+            route = NavDestination.AuthGraph.SignUp.route
         ) {
             SignUpRoute(
                 navigateToLogin = navController::navigateToLogin,
@@ -46,7 +35,7 @@ fun NavGraphBuilder.addAuthNavGraph(
             )
         }
         composable(
-            route = UserNameNavRoute
+            route = NavDestination.AuthGraph.Username.route
         ) {
             val viewModel = hiltViewModel<SignUpFormViewModel>()
             UserNameRoute(
@@ -56,13 +45,15 @@ fun NavGraphBuilder.addAuthNavGraph(
             )
         }
         composable(
-            route = EmailNavRoute,
-            arguments = listOf(navArgument(UserNameArgId) { type = NavType.StringType })
+            route = NavDestination.AuthGraph.Email.route,
+            arguments = listOf(navArgument(NavDestination.AuthGraph.Email.UsernameArgId) {
+                type = NavType.StringType
+            })
         ) { backStackEntry ->
-            val userName = backStackEntry.arguments?.getString(UserNameArgId)
+            val userName = backStackEntry.arguments?.getString(NavDestination.AuthGraph.Email.UsernameArgId)
             checkNotNull(userName)
             val parentEntry = remember(backStackEntry) {
-                navController.getBackStackEntry(UserNameNavRoute)
+                navController.getBackStackEntry(NavDestination.AuthGraph.Username.route)
             }
             val viewModel = hiltViewModel<SignUpFormViewModel>(parentEntry)
             EmailRoute(
@@ -73,10 +64,10 @@ fun NavGraphBuilder.addAuthNavGraph(
             )
         }
         composable(
-            route = PasswordNavRoute
+            route = NavDestination.AuthGraph.Password.route
         ) { backStackEntry ->
             val parentEntry = remember(backStackEntry) {
-                navController.getBackStackEntry(UserNameNavRoute)
+                navController.getBackStackEntry(NavDestination.AuthGraph.Username.route)
             }
             val viewModel = hiltViewModel<SignUpFormViewModel>(parentEntry)
             PasswordRoute(
@@ -86,10 +77,10 @@ fun NavGraphBuilder.addAuthNavGraph(
             )
         }
         composable(
-            route = BirthdayNavRoute
+            route = NavDestination.AuthGraph.Birthday.route
         ) { backStackEntry ->
             val parentEntry = remember(backStackEntry) {
-                navController.getBackStackEntry(UserNameNavRoute)
+                navController.getBackStackEntry(NavDestination.AuthGraph.Username.route)
             }
             val viewModel = hiltViewModel<SignUpFormViewModel>(parentEntry)
             BirthdayRoute(
@@ -99,7 +90,7 @@ fun NavGraphBuilder.addAuthNavGraph(
             )
         }
         composable(
-            route = LoginNavRoute
+            route = NavDestination.AuthGraph.Login.route
         ) {
             LoginRoute(
                 navigateToSignUp = navController::popBackStack,
@@ -107,7 +98,7 @@ fun NavGraphBuilder.addAuthNavGraph(
             )
         }
         composable(
-            route = LoginFormNavRoute
+            route = NavDestination.AuthGraph.LoginForm.route
         ) {
             val viewModel = hiltViewModel<LoginFormViewModel>()
             LoginFormRoute(
@@ -128,29 +119,29 @@ fun NavGraphBuilder.addAuthNavGraph(
 }
 
 fun NavController.navigateToLogin() {
-    navigate(LoginNavRoute)
+    navigate(NavDestination.AuthGraph.Login.route)
 }
 
 fun NavController.navigateToUserName() {
-    navigate(UserNameNavRoute)
+    navigate(NavDestination.AuthGraph.Username.route)
 }
 
-fun NavController.navigateToEmail(userName: String) {
-    navigate("email/$userName")
+fun NavController.navigateToEmail(username: String) {
+    navigate(NavDestination.AuthGraph.Email.createRoute(username))
 }
 
 fun NavController.navigateToPassword() {
-    navigate(PasswordNavRoute)
+    navigate(NavDestination.AuthGraph.Password.route)
 }
 
 fun NavController.navigateToBirthday() {
-    navigate(BirthdayNavRoute)
+    navigate(NavDestination.AuthGraph.Birthday.route)
 }
 
 fun NavController.navigateToOnboarding() {
-    navigate(OnboardingGraphRoute)
+    navigate(NavDestination.OnboardingGraph.route)
 }
 
 fun NavController.navigateToLoginForm() {
-    navigate(LoginFormNavRoute)
+    navigate(NavDestination.AuthGraph.LoginForm.route)
 }

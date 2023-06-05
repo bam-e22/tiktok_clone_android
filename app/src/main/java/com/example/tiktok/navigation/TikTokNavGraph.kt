@@ -10,7 +10,7 @@ import androidx.navigation.compose.rememberNavController
 fun TikTokNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = AuthGraphRoute, // TODO: 메인 루트로 변경
+    startDestination: String = NavDestination.AuthGraph.route, // TODO: 메인 루트로 변경
 ) {
     NavHost(
         modifier = modifier,

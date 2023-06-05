@@ -7,26 +7,22 @@ import androidx.navigation.navigation
 import com.example.tiktok.ui.authentication.onboarding.InterestRoute
 import com.example.tiktok.ui.authentication.onboarding.TutorialRoute
 
-const val OnboardingGraphRoute = "onboarding"
-const val InterestNavRoute = "interest"
-const val TutorialNavRoute = "tutorial"
-
 fun NavGraphBuilder.addOnboardingGraph(
     navController: NavController,
 ) {
     navigation(
-        route = OnboardingGraphRoute,
-        startDestination = InterestNavRoute
+        route = NavDestination.OnboardingGraph.route,
+        startDestination = NavDestination.OnboardingGraph.Interest.route
     ) {
         composable(
-            route = InterestNavRoute
+            route = NavDestination.OnboardingGraph.Interest.route
         ) {
             InterestRoute(
                 navigateToTutorial = navController::navigateToTutorial
             )
         }
         composable(
-            route = TutorialNavRoute
+            route = NavDestination.OnboardingGraph.Tutorial.route
         ) {
             TutorialRoute(
                 navigateToMain = {}
@@ -36,5 +32,5 @@ fun NavGraphBuilder.addOnboardingGraph(
 }
 
 fun NavController.navigateToTutorial() {
-    navigate(TutorialNavRoute)
+    navigate(NavDestination.OnboardingGraph.Tutorial.route)
 }
