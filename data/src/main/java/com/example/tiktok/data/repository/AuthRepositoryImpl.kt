@@ -13,8 +13,11 @@ class AuthRepositoryImpl @Inject constructor() : AuthRepository {
         FirebaseAuth.getInstance()
     }
 
+    override fun isLoggedIn(): Boolean = auth.currentUser != null
+
     override suspend fun signUpWithEmail(authFormModel: AuthFormModel) {
-        val authResult = auth.createUserWithEmailAndPassword(authFormModel.email, authFormModel.password).await()
+        val authResult =
+            auth.createUserWithEmailAndPassword(authFormModel.email, authFormModel.password).await()
         checkNotNull(authResult.user)
     }
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.tiktok.domain.delegate.InputFormValidationDelegate
 import com.example.tiktok.domain.delegate.InputFormValidationDelegateImpl
 import com.example.tiktok.domain.model.AuthFormModel
+import com.example.tiktok.domain.usecase.GetAuthStateUseCase
 import com.example.tiktok.domain.usecase.SignUpWithEmailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -22,7 +23,11 @@ private const val BIRTHDAY_KEY = "birthday"
 @HiltViewModel
 class SignUpFormViewModel @Inject constructor(
     private val signUpWithEmailUseCase: SignUpWithEmailUseCase,
+    private val getAuthStateUseCase: GetAuthStateUseCase,
 ) : ViewModel(), InputFormValidationDelegate by InputFormValidationDelegateImpl() {
+    val isLoggedIn: Boolean
+        get() = getAuthStateUseCase()
+
     private val _signUpUiEvent = MutableSharedFlow<SignUpUiEvent>()
     val signUpUiEvent: SharedFlow<SignUpUiEvent> = _signUpUiEvent.asSharedFlow()
 

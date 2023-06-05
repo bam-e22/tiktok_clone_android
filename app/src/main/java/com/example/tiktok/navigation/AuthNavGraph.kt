@@ -29,15 +29,21 @@ fun NavGraphBuilder.authNavGraph(
         composable(
             route = AuthScreen.SignUp.route
         ) {
+            val viewModel = hiltViewModel<SignUpFormViewModel>()
             SignUpRoute(
                 navigateToLogin = navController::navigateToLogin,
                 navigateToUserName = navController::navigateToUserName,
+                navigateToMain = navController::navigateToMain,
+                viewModel = viewModel
             )
         }
         composable(
             route = AuthScreen.Username.route
-        ) {
-            val viewModel = hiltViewModel<SignUpFormViewModel>()
+        ) {backStackEntry ->
+            val parentEntry = remember(backStackEntry) {
+                navController.getBackStackEntry(AuthScreen.SignUp.route)
+            }
+            val viewModel = hiltViewModel<SignUpFormViewModel>(parentEntry)
             UserNameRoute(
                 navigateBack = navController::popBackStack,
                 navigateToEmail = navController::navigateToEmail,
@@ -53,7 +59,7 @@ fun NavGraphBuilder.authNavGraph(
             val userName = backStackEntry.arguments?.getString(AuthScreen.Email.UsernameArgId)
             checkNotNull(userName)
             val parentEntry = remember(backStackEntry) {
-                navController.getBackStackEntry(AuthScreen.Username.route)
+                navController.getBackStackEntry(AuthScreen.SignUp.route)
             }
             val viewModel = hiltViewModel<SignUpFormViewModel>(parentEntry)
             EmailRoute(
@@ -67,7 +73,7 @@ fun NavGraphBuilder.authNavGraph(
             route = AuthScreen.Password.route
         ) { backStackEntry ->
             val parentEntry = remember(backStackEntry) {
-                navController.getBackStackEntry(AuthScreen.Username.route)
+                navController.getBackStackEntry(AuthScreen.SignUp.route)
             }
             val viewModel = hiltViewModel<SignUpFormViewModel>(parentEntry)
             PasswordRoute(
@@ -80,7 +86,7 @@ fun NavGraphBuilder.authNavGraph(
             route = AuthScreen.Birthday.route
         ) { backStackEntry ->
             val parentEntry = remember(backStackEntry) {
-                navController.getBackStackEntry(AuthScreen.Username.route)
+                navController.getBackStackEntry(AuthScreen.SignUp.route)
             }
             val viewModel = hiltViewModel<SignUpFormViewModel>(parentEntry)
             BirthdayRoute(
