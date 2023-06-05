@@ -11,18 +11,18 @@ fun NavGraphBuilder.addOnboardingGraph(
     navController: NavController,
 ) {
     navigation(
-        route = NavDestination.OnboardingGraph.route,
-        startDestination = NavDestination.OnboardingGraph.Interest.route
+        route = TikTokNavGraph.Onboarding.route,
+        startDestination = OnboardingScreen.Interest.route
     ) {
         composable(
-            route = NavDestination.OnboardingGraph.Interest.route
+            route = OnboardingScreen.Interest.route
         ) {
             InterestRoute(
                 navigateToTutorial = navController::navigateToTutorial
             )
         }
         composable(
-            route = NavDestination.OnboardingGraph.Tutorial.route
+            route = OnboardingScreen.Tutorial.route
         ) {
             TutorialRoute(
                 navigateToMain = {}
@@ -31,6 +31,11 @@ fun NavGraphBuilder.addOnboardingGraph(
     }
 }
 
+sealed class OnboardingScreen(val route: String) {
+    object Interest : OnboardingScreen("interest")
+    object Tutorial : OnboardingScreen("tutorial")
+}
+
 fun NavController.navigateToTutorial() {
-    navigate(NavDestination.OnboardingGraph.Tutorial.route)
+    navigate(OnboardingScreen.Tutorial.route)
 }
