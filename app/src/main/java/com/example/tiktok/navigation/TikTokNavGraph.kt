@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.tiktok.navigation.main.MainScreen
 
 @Composable
 fun TikTokNavGraph(
@@ -19,7 +20,10 @@ fun TikTokNavGraph(
         startDestination = startDestination
     ) {
         authNavGraph(navController)
-        addOnboardingGraph(navController)
+        onboardingGraph(navController)
+        composable(route = TikTokNavGraph.Main.route) {
+            MainScreen()
+        }
     }
 }
 

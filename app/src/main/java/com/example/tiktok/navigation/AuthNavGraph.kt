@@ -17,7 +17,6 @@ import com.example.tiktok.ui.authentication.signup.SignUpRoute
 import com.example.tiktok.ui.authentication.signup.UserNameRoute
 import com.example.tiktok.ui.authentication.viewmodel.LoginFormViewModel
 import com.example.tiktok.ui.authentication.viewmodel.SignUpFormViewModel
-import com.example.tiktok.ui.home.MainScreen
 
 fun NavGraphBuilder.authNavGraph(
     navController: NavController,
@@ -103,17 +102,9 @@ fun NavGraphBuilder.authNavGraph(
             val viewModel = hiltViewModel<LoginFormViewModel>()
             LoginFormRoute(
                 navigateBack = navController::popBackStack,
-                navigateToMain = {
-                    navController.navigate("Main") // TODO: for test
-                },
+                navigateToMain = navController::navigateToMain,
                 viewModel = viewModel
             )
-        }
-        // TODO: for test
-        composable(
-            route = "Main"
-        ) {
-            MainScreen()
         }
     }
 }
@@ -158,4 +149,8 @@ fun NavController.navigateToOnboarding() {
 
 fun NavController.navigateToLoginForm() {
     navigate(AuthScreen.LoginForm.route)
+}
+
+fun NavController.navigateToMain() {
+    navigate(TikTokNavGraph.Main.route)
 }
