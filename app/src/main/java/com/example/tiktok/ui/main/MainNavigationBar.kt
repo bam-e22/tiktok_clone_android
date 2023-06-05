@@ -1,39 +1,16 @@
-package com.example.tiktok.navigation.main
+package com.example.tiktok.ui.main
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
+import com.example.tiktok.navigation.MainScreen
 
 @Composable
-fun MainScreen(navController: NavHostController = rememberNavController()) {
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
-        bottomBar = {
-            BottomNavigationBar(navController)
-        }
-    ) { paddingValues ->
-        MainNavGraph(
-            navController = navController,
-            paddingValues = paddingValues
-        )
-    }
-}
-
-@Composable
-private fun BottomNavigationBar(navController: NavHostController) {
+fun MainNavigationBar(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 

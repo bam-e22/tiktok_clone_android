@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun VideoTimelineScreen(
+    navigateToSignUp:() -> Unit
 ) {
     Scaffold {_ ->
         Column {
@@ -19,7 +20,7 @@ fun VideoTimelineScreen(
                 "VideoTimelineScreen",
                 style = MaterialTheme.typography.displayLarge
             )
-            Button(onClick = { /*TODO*/ }) {
+            Button(onClick = navigateToSignUp) {
                 Text(
                     "Go to signUp",
                     style = MaterialTheme.typography.titleMedium

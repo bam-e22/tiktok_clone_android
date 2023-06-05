@@ -7,7 +7,7 @@ import androidx.navigation.navigation
 import com.example.tiktok.ui.authentication.onboarding.InterestRoute
 import com.example.tiktok.ui.authentication.onboarding.TutorialRoute
 
-fun NavGraphBuilder.onboardingGraph(
+fun NavGraphBuilder.onboardingNavGraph(
     navController: NavController,
 ) {
     navigation(
