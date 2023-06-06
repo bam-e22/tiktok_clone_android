@@ -20,7 +20,7 @@ import com.example.tiktok.ui.main.CameraScreen
 import com.example.tiktok.ui.main.DiscoverScreen
 import com.example.tiktok.ui.main.InboxScreen
 import com.example.tiktok.ui.main.ProfileScreen
-import com.example.tiktok.ui.main.VideoTimelineScreen
+import com.example.tiktok.ui.main.TimelineScreen
 
 fun NavGraphBuilder.mainNavGraph(
     navController: NavController,
@@ -32,7 +32,7 @@ fun NavGraphBuilder.mainNavGraph(
         composable(
             route = MainScreen.VideoTimeline.route
         ) {
-            VideoTimelineScreen(
+            TimelineScreen(
                 navigateToSignUp = navController::navigateToSignUp
             )
         }

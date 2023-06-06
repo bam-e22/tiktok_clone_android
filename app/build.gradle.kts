@@ -56,11 +56,13 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.activity.compose)
     implementation(platform(libs.compose.bom))
     implementation(libs.ui)
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
+    implementation(libs.ui.material.icon.extended)
     implementation(libs.material3)
     implementation(libs.navigation.compose)
     implementation(libs.hilt.navigation.compose)
@@ -69,6 +71,9 @@ dependencies {
     kapt(libs.hilt.android.compiler)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.ui)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
