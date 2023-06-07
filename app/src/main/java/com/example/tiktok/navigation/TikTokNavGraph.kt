@@ -35,7 +35,10 @@ fun TikTokNavGraph(
     )
     { innerPadding ->
         NavHost(
-            modifier = modifier.padding(innerPadding),
+            modifier = modifier
+                .padding(
+                    bottom = innerPadding.calculateBottomPadding()
+                ),
             navController = navController,
             startDestination = startDestination
         ) {

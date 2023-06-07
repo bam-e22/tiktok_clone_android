@@ -33,7 +33,7 @@ fun NavGraphBuilder.mainNavGraph(
             route = MainScreen.VideoTimeline.route
         ) {
             TimelineScreen(
-                navigateToSignUp = navController::navigateToSignUp
+                navigateToSignUp = navController::navigateToSignUp,
             )
         }
         composable(

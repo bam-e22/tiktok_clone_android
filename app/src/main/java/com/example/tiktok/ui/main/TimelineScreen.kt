@@ -12,13 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.media3.common.util.UnstableApi
+import androidx.media3.ui.AspectRatioFrameLayout.RESIZE_MODE_ZOOM
 import androidx.media3.ui.PlayerView
 import com.example.tiktok.ui.components.rememberVideoPlayerState
 
 @OptIn(ExperimentalFoundationApi::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@UnstableApi
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnsafeOptInUsageError")
 @Composable
 fun TimelineScreen(
     navigateToSignUp: () -> Unit,
@@ -29,22 +28,31 @@ fun TimelineScreen(
                 .fillMaxSize()
                 .background(Color.Black),
         ) {
-            VerticalPager(pageCount = 4) {
-                val videoPlayerState = rememberVideoPlayerState()
-                AndroidView(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    factory = { context ->
-                        PlayerView(context).also {
-                            videoPlayerState.prepare(Uri.parse("asset:///IMG_2507.MOV"))
-                            it.player = videoPlayerState.player
-                        }
-                    },
-                    update = {
-
-                    }
-                )
+            VerticalPager(
+                pageCount = 2,
+                key = { it }
+            ) {
+                VideoPost()
             }
         }
     }
+}
+
+@SuppressLint("UnsafeOptInUsageError")
+@Composable
+private fun VideoPost(
+    modifier: Modifier = Modifier,
+) {
+    val videoPlayerState = rememberVideoPlayerState()
+    AndroidView(
+        modifier = modifier
+            .fillMaxSize(),
+        factory = { context ->
+            PlayerView(context).also {
+                it.resizeMode = RESIZE_MODE_ZOOM
+                it.player = videoPlayerState.player
+                videoPlayerState.prepare(Uri.parse("asset:///IMG_2507.MOV"))
+            }
+        }
+    )
 }
