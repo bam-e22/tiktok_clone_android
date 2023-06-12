@@ -2,7 +2,6 @@ package com.example.tiktok.delegate
 
 import android.content.Context
 import android.net.Uri
-import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
@@ -42,6 +41,7 @@ class VideoPlayerDelegate @Inject constructor(
         val mediaItem = MediaItem.fromUri(uri)
         exoPlayer.setMediaItem(mediaItem)
         exoPlayer.addListener(listener)
+        exoPlayer.repeatMode = Player.REPEAT_MODE_ALL
         exoPlayer.prepare()
         exoPlayer.play()
     }
