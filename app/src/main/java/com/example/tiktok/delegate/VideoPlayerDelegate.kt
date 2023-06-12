@@ -40,7 +40,6 @@ class VideoPlayerDelegate @Inject constructor(
 
     fun prepare(uri: Uri) {
         val mediaItem = MediaItem.fromUri(uri)
-        //exoPlayer.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT
         exoPlayer.setMediaItem(mediaItem)
         exoPlayer.addListener(listener)
         exoPlayer.prepare()
