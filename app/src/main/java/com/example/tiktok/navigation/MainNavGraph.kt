@@ -6,11 +6,15 @@ import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Textsms
+import androidx.compose.material.icons.filled.Whatshot
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Build
 import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Textsms
+import androidx.compose.material.icons.outlined.Whatshot
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -74,8 +78,8 @@ sealed class MainScreen(
 
     object Discover : MainScreen(
         route = "discover",
-        selectedIcon = Icons.Filled.Build,
-        unselectedIcon = Icons.Outlined.Build,
+        selectedIcon = Icons.Filled.Whatshot,
+        unselectedIcon = Icons.Outlined.Whatshot,
         text = "Discover"
     )
 
@@ -83,21 +87,21 @@ sealed class MainScreen(
         route = "camera",
         selectedIcon = Icons.Filled.Add,
         unselectedIcon = Icons.Outlined.Add,
-        text = "Discover"
+        text = ""
     )
 
     object Inbox : MainScreen(
         route = "inbox",
-        selectedIcon = Icons.Filled.Email,
-        unselectedIcon = Icons.Outlined.Email,
-        text = "Discover"
+        selectedIcon = Icons.Filled.Textsms,
+        unselectedIcon = Icons.Outlined.Textsms,
+        text = "Inbox"
     )
 
     object Profile : MainScreen(
         route = "profile",
         selectedIcon = Icons.Filled.Person,
         unselectedIcon = Icons.Outlined.Person,
-        text = "Discover"
+        text = "Profile"
     )
 }
 
