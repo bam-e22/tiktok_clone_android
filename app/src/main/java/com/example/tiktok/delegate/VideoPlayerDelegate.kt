@@ -7,6 +7,7 @@ import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import com.example.tiktok.domain.di.IoDispatcher
+import com.example.tiktok.model.PlayerState
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -14,6 +15,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -26,13 +28,17 @@ class VideoPlayerDelegate @Inject constructor(
 
     val exoPlayer: ExoPlayer = ExoPlayer.Builder(context).build()
 
-    private val _isPlaying = MutableStateFlow(false)
-    val isPlaying = _isPlaying.asStateFlow()
+    private val _playerState = MutableStateFlow<PlayerState>(PlayerState.IDLE)
+    val playerState = _playerState.asStateFlow()
 
     private val listener = object : Player.Listener {
-        override fun onIsPlayingChanged(isPlaying: Boolean) {
+        override fun onPlaybackStateChanged(playbackState: Int) {
             launch {
-                _isPlaying.emit(isPlaying)
+                when(playbackState) {
+                    Player.STATE_IDLE -> _playerState.emit(PlayerState.IDLE)
+                    Player.STATE_BUFFERING -> _playerState.emit(PlayerState.BUFFERING)
+                    else -> _playerState.emit(PlayerState.READY)
+                }
             }
         }
     }
@@ -43,7 +49,6 @@ class VideoPlayerDelegate @Inject constructor(
         exoPlayer.addListener(listener)
         exoPlayer.repeatMode = Player.REPEAT_MODE_ALL
         exoPlayer.prepare()
-        exoPlayer.play()
     }
 
     fun play() {

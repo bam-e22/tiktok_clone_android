@@ -4,6 +4,7 @@ package com.example.tiktok.ui.components
 
 import android.annotation.SuppressLint
 import android.net.Uri
+import android.view.View
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
@@ -29,6 +30,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import com.example.tiktok.R
+import com.example.tiktok.model.PlayerState
 import com.example.tiktok.ui.utils.Sizes
 
 @SuppressLint("UnsafeOptInUsageError")
@@ -40,6 +42,7 @@ fun VideoPlayer(
     var showPlayButton by remember {
         mutableStateOf(false)
     }
+    val playerState = videoPlayerState.playerState.value
     Box(
         contentAlignment = Alignment.Center
     ) {
@@ -63,8 +66,17 @@ fun VideoPlayer(
                     it.useController = false
                     it.controllerAutoShow = false
                     it.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
-                    it.player = videoPlayerState.player
+                    it.player = videoPlayerState.player.apply {
+                        playWhenReady = true
+                    }
                     videoPlayerState.prepare(Uri.parse("asset:///IMG_2507.MOV"))
+                }
+            },
+            update = {
+                it.visibility = if (playerState == PlayerState.READY) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
                 }
             }
         )

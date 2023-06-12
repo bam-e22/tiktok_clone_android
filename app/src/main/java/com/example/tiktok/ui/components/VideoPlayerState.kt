@@ -21,7 +21,7 @@ import javax.inject.Inject
 class VideoPlayerState @Inject constructor(
     private val delegate: VideoPlayerDelegate,
 ) {
-    val playState @Composable get() = delegate.isPlaying.collectAsStateWithLifecycle()
+    val playerState @Composable get() = delegate.playerState.collectAsStateWithLifecycle()
     val player: Player get() = delegate.exoPlayer
     fun prepare(uri: Uri) = delegate.prepare(uri)
     fun play() = delegate.play()
