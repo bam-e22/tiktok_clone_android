@@ -25,4 +25,8 @@ class AuthRepositoryImpl @Inject constructor() : AuthRepository {
         val authResult = auth.signInWithEmailAndPassword(authFormModel.email, authFormModel.password).await()
         checkNotNull(authResult.user)
     }
+
+    override fun signOut() {
+        auth.signOut()
+    }
 }

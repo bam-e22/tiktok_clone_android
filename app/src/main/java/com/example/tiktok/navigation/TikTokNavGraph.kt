@@ -18,7 +18,7 @@ import com.example.tiktok.ui.components.MainNavigationBar
 fun TikTokNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = TikTokNavGraph.Auth.route, // TODO: 메인 루트로 변경
+    startDestination: String = TikTokNavGraph.Auth.route,
 ) {
     Scaffold(
         modifier

@@ -39,7 +39,7 @@ fun NavGraphBuilder.authNavGraph(
         }
         composable(
             route = AuthScreen.Username.route
-        ) {backStackEntry ->
+        ) { backStackEntry ->
             val parentEntry = remember(backStackEntry) {
                 navController.getBackStackEntry(AuthScreen.SignUp.route)
             }
