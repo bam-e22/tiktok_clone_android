@@ -1,4 +1,4 @@
-package com.example.tiktok.ui.main
+package com.example.tiktok.ui.discover
 
 import android.annotation.SuppressLint
 import androidx.compose.material3.MaterialTheme
@@ -8,10 +8,10 @@ import androidx.compose.runtime.Composable
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun CameraScreen() {
-    Scaffold {_ ->
+fun DiscoverRoute() {
+    Scaffold { _ ->
         Text(
-            "CameraScreen",
+            "DiscoverScreen",
             style = MaterialTheme.typography.displayLarge
         )
     }

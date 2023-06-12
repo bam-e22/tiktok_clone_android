@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.dp
 import com.example.tiktok.R
 import com.example.tiktok.ui.authentication.viewmodel.SignUpFormViewModel
 import com.example.tiktok.ui.components.BasicButton
-import com.example.tiktok.ui.components.TikTokTopAppBar
+import com.example.tiktok.ui.components.TikTokCenterAlignedTopAppBar
 import com.example.tiktok.ui.components.UnderlineTextField
 import com.example.tiktok.ui.theme.Black54
 import com.example.tiktok.ui.utils.convertToDate
@@ -80,7 +80,7 @@ private fun BirthdayScreen(
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
         topBar = {
-            TikTokTopAppBar(
+            TikTokCenterAlignedTopAppBar(
                 title = stringResource(R.string.sign_up),
                 navigateBack = navigateBack
             )

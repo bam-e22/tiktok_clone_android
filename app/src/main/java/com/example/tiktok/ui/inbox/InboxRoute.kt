@@ -1,4 +1,4 @@
-package com.example.tiktok.ui.main
+package com.example.tiktok.ui.inbox
 
 import android.annotation.SuppressLint
 import androidx.compose.material3.MaterialTheme
@@ -8,10 +8,10 @@ import androidx.compose.runtime.Composable
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ProfileScreen() {
+fun InboxRoute() {
     Scaffold {_ ->
         Text(
-            "ProfileScreen",
+            "InboxScreen",
             style = MaterialTheme.typography.displayLarge
         )
     }

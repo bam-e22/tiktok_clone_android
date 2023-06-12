@@ -34,7 +34,7 @@ fun MainNavigationBar(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    fun isTimelineRoute() = currentRoute == MainScreen.VideoTimeline.route
+    fun isTimelineRoute() = currentRoute == MainScreen.BottomNavigation.VideoTimeline.route
 
     NavigationBar(
         containerColor = if (isTimelineRoute()) {
@@ -45,11 +45,11 @@ fun MainNavigationBar(navController: NavHostController) {
         tonalElevation = 0.dp
     ) {
         val list = listOf(
-            MainScreen.VideoTimeline,
-            MainScreen.Discover,
-            MainScreen.Camera,
-            MainScreen.Inbox,
-            MainScreen.Profile
+            MainScreen.BottomNavigation.VideoTimeline,
+            MainScreen.BottomNavigation.Discover,
+            MainScreen.BottomNavigation.Camera,
+            MainScreen.BottomNavigation.Inbox,
+            MainScreen.BottomNavigation.Profile
         )
         list.forEachIndexed { index, screen ->
             NavigationBarItem(
@@ -81,7 +81,7 @@ fun MainNavigationBar(navController: NavHostController) {
                     }
                 },
                 icon = {
-                    if (screen.route == MainScreen.Camera.route) {
+                    if (screen.route == MainScreen.BottomNavigation.Camera.route) {
                         Box(
                             modifier = Modifier
                                 .fillMaxSize()

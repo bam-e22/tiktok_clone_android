@@ -1,4 +1,4 @@
-package com.example.tiktok.ui.main
+package com.example.tiktok.ui.video
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -12,12 +12,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.example.tiktok.ui.components.VideoPlayer
 
+@Composable
+fun TimelineRoute(
+    navigateToSignUp: () -> Unit,
+) {
+    TimelineScreen()
+}
+
 @OptIn(ExperimentalFoundationApi::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnsafeOptInUsageError")
 @Composable
-fun TimelineScreen(
-    navigateToSignUp: () -> Unit,
-) {
+private fun TimelineScreen() {
     Scaffold {
         Box(
             modifier = Modifier

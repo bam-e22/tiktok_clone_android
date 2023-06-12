@@ -1,4 +1,4 @@
-package com.example.tiktok.ui.main.viewmodel
+package com.example.tiktok.ui.video.viewmodel
 
 import androidx.lifecycle.ViewModel
 import javax.inject.Inject

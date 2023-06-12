@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.example.tiktok.R
 import com.example.tiktok.ui.authentication.viewmodel.LoginFormViewModel
 import com.example.tiktok.ui.components.BasicButton
-import com.example.tiktok.ui.components.TikTokTopAppBar
+import com.example.tiktok.ui.components.TikTokCenterAlignedTopAppBar
 import com.example.tiktok.ui.components.UnderlineTextField
 import kotlinx.coroutines.launch
 
@@ -70,7 +70,7 @@ private fun LoginFormScreen(
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colorScheme.background),
         topBar = {
-            TikTokTopAppBar(
+            TikTokCenterAlignedTopAppBar(
                 title = stringResource(R.string.log_in),
                 navigateBack = navigateBack
             )
