@@ -12,15 +12,17 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Textsms
 import androidx.compose.material.icons.outlined.Whatshot
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.tiktok.ui.discover.DiscoverRoute
 import com.example.tiktok.ui.inbox.InboxRoute
+import com.example.tiktok.ui.timeline.TimelineRoute
+import com.example.tiktok.ui.timeline.viewmodel.TimelineViewModel
 import com.example.tiktok.ui.user.ProfileRoute
 import com.example.tiktok.ui.video.CameraRoute
-import com.example.tiktok.ui.video.TimelineRoute
 
 fun NavGraphBuilder.mainNavGraph(
     navController: NavController,
@@ -32,8 +34,9 @@ fun NavGraphBuilder.mainNavGraph(
         composable(
             route = MainDestination.BottomNavigation.VideoTimeline.route
         ) {
+            val viewModel = hiltViewModel<TimelineViewModel>()
             TimelineRoute(
-                navigateToSignUp = navController::navigateToSignUp,
+                viewModel = viewModel,
             )
         }
         composable(

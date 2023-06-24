@@ -1,26 +1,28 @@
-package com.example.tiktok.ui.video
+package com.example.tiktok.ui.timeline
 
 import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.VerticalPager
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import com.example.tiktok.ui.components.VideoPlayer
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.tiktok.model.VideoItem
+import com.example.tiktok.ui.timeline.viewmodel.TimelineViewModel
 
 @Composable
 fun TimelineRoute(
-    navigateToSignUp: () -> Unit,
+    viewModel: TimelineViewModel,
 ) {
     val darkTheme = isSystemInDarkTheme()
     val view = LocalView.current
@@ -32,25 +34,30 @@ fun TimelineRoute(
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
         }
     }
-    TimelineScreen()
+
+    val videoItems by viewModel.videoItems.collectAsStateWithLifecycle()
+    TimelineScreen(
+        videoItems = videoItems
+    )
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnsafeOptInUsageError")
 @Composable
-private fun TimelineScreen() {
+private fun TimelineScreen(
+    videoItems: List<VideoItem>
+) {
     Scaffold {
-        Box(
+        VerticalPager(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.Black),
-        ) {
-            VerticalPager(
-                pageCount = 2,
-                key = { it }
-            ) {
-                VideoPlayer()
-            }
+            pageCount = videoItems.size,
+            key = { it }
+        ) { index ->
+            VideoPost(
+                videoItem = videoItems[index]
+            )
         }
     }
 }

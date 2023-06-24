@@ -44,10 +44,11 @@ fun VideoPlayer(
     }
     val playerState = videoPlayerState.playerState.value
     Box(
+        modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         AndroidView(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .clickable(
                     interactionSource = MutableInteractionSource(),
