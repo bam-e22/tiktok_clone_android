@@ -12,15 +12,12 @@ import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Textsms
 import androidx.compose.material.icons.outlined.Whatshot
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.tiktok.ui.discover.DiscoverRoute
 import com.example.tiktok.ui.inbox.InboxRoute
-import com.example.tiktok.ui.setting.SettingRoute
-import com.example.tiktok.ui.setting.viewmodel.SettingViewModel
 import com.example.tiktok.ui.user.ProfileRoute
 import com.example.tiktok.ui.video.CameraRoute
 import com.example.tiktok.ui.video.TimelineRoute
@@ -29,61 +26,53 @@ fun NavGraphBuilder.mainNavGraph(
     navController: NavController,
 ) {
     navigation(
-        route = TikTokNavGraph.Main.route,
-        startDestination = MainScreen.BottomNavigation.VideoTimeline.route
+        route = TikTokDestination.Main.route,
+        startDestination = MainDestination.BottomNavigation.VideoTimeline.route
     ) {
         composable(
-            route = MainScreen.BottomNavigation.VideoTimeline.route
+            route = MainDestination.BottomNavigation.VideoTimeline.route
         ) {
             TimelineRoute(
                 navigateToSignUp = navController::navigateToSignUp,
             )
         }
         composable(
-            route = MainScreen.BottomNavigation.Discover.route
+            route = MainDestination.BottomNavigation.Discover.route
         ) {
             DiscoverRoute()
         }
         composable(
-            route = MainScreen.BottomNavigation.Camera.route
+            route = MainDestination.BottomNavigation.Camera.route
         ) {
             CameraRoute()
         }
         composable(
-            route = MainScreen.BottomNavigation.Inbox.route
+            route = MainDestination.BottomNavigation.Inbox.route
         ) {
             InboxRoute()
         }
         composable(
-            route = MainScreen.BottomNavigation.Profile.route
+            route = MainDestination.BottomNavigation.Profile.route
         ) {
             ProfileRoute(
-                navigateToSettings = navController::navigateToSettings
+                navigateToSettings = navController::navigateToEtc
             )
         }
-        composable(
-            route = MainScreen.Settings.route
-        ) {
-            val viewModel = hiltViewModel<SettingViewModel>()
-            SettingRoute(
-                navigateBack = navController::popBackStack,
-                navigateToAuth = navController::navigateToAuth,
-                viewModel = viewModel
-            )
-        }
+
+        etcNavGraph(navController)
     }
 }
 
-sealed class MainScreen(val route: String) {
+sealed class MainDestination(val route: String) {
 
-    object Settings : MainScreen("settings")
+    object Etc : MainDestination("etc")
 
     sealed class BottomNavigation(
         route: String,
         val selectedIcon: ImageVector,
         val unselectedIcon: ImageVector,
         val text: String,
-    ) : MainScreen(route) {
+    ) : MainDestination(route) {
         object VideoTimeline : BottomNavigation(
             "timeline",
             selectedIcon = Icons.Filled.Home,
@@ -122,13 +111,13 @@ sealed class MainScreen(val route: String) {
 }
 
 fun NavController.navigateToSignUp() {
-    navigate(TikTokNavGraph.Auth.route)
+    navigate(TikTokDestination.Auth.route)
 }
 
-fun NavController.navigateToSettings() {
-    navigate(MainScreen.Settings.route)
+fun NavController.navigateToEtc() {
+    navigate(MainDestination.Etc.route)
 }
 
 fun NavController.navigateToAuth() {
-    navigate(TikTokNavGraph.Auth.route)
+    navigate(TikTokDestination.Auth.route)
 }

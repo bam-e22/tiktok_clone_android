@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.tiktok.navigation.MainScreen
+import com.example.tiktok.navigation.MainDestination
 import com.example.tiktok.ui.theme.PrimaryPink
 import com.example.tiktok.ui.utils.Sizes.MediumIconSize
 import com.example.tiktok.ui.utils.Sizes.SmallIconSize
@@ -34,7 +34,7 @@ fun MainNavigationBar(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    fun isTimelineRoute() = currentRoute == MainScreen.BottomNavigation.VideoTimeline.route
+    fun isTimelineRoute() = currentRoute == MainDestination.BottomNavigation.VideoTimeline.route
 
     NavigationBar(
         containerColor = if (isTimelineRoute()) {
@@ -45,11 +45,11 @@ fun MainNavigationBar(navController: NavHostController) {
         tonalElevation = 0.dp
     ) {
         val list = listOf(
-            MainScreen.BottomNavigation.VideoTimeline,
-            MainScreen.BottomNavigation.Discover,
-            MainScreen.BottomNavigation.Camera,
-            MainScreen.BottomNavigation.Inbox,
-            MainScreen.BottomNavigation.Profile
+            MainDestination.BottomNavigation.VideoTimeline,
+            MainDestination.BottomNavigation.Discover,
+            MainDestination.BottomNavigation.Camera,
+            MainDestination.BottomNavigation.Inbox,
+            MainDestination.BottomNavigation.Profile
         )
         list.forEachIndexed { index, screen ->
             NavigationBarItem(
@@ -81,7 +81,7 @@ fun MainNavigationBar(navController: NavHostController) {
                     }
                 },
                 icon = {
-                    if (screen.route == MainScreen.BottomNavigation.Camera.route) {
+                    if (screen.route == MainDestination.BottomNavigation.Camera.route) {
                         Box(
                             modifier = Modifier
                                 .fillMaxSize()

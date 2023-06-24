@@ -23,11 +23,11 @@ fun NavGraphBuilder.authNavGraph(
     navController: NavController,
 ) {
     navigation(
-        route = TikTokNavGraph.Auth.route,
-        startDestination = AuthScreen.SignUp.route
+        route = TikTokDestination.Auth.route,
+        startDestination = AuthDestination.SignUp.route
     ) {
         composable(
-            route = AuthScreen.SignUp.route
+            route = AuthDestination.SignUp.route
         ) {
             val viewModel = hiltViewModel<SignUpFormViewModel>()
             SignUpRoute(
@@ -38,10 +38,10 @@ fun NavGraphBuilder.authNavGraph(
             )
         }
         composable(
-            route = AuthScreen.Username.route
+            route = AuthDestination.Username.route
         ) { backStackEntry ->
             val parentEntry = remember(backStackEntry) {
-                navController.getBackStackEntry(AuthScreen.SignUp.route)
+                navController.getBackStackEntry(AuthDestination.SignUp.route)
             }
             val viewModel = hiltViewModel<SignUpFormViewModel>(parentEntry)
             UserNameRoute(
@@ -51,15 +51,15 @@ fun NavGraphBuilder.authNavGraph(
             )
         }
         composable(
-            route = AuthScreen.Email.route,
-            arguments = listOf(navArgument(AuthScreen.Email.UsernameArgId) {
+            route = AuthDestination.Email.route,
+            arguments = listOf(navArgument(AuthDestination.Email.UsernameArgId) {
                 type = NavType.StringType
             })
         ) { backStackEntry ->
-            val userName = backStackEntry.arguments?.getString(AuthScreen.Email.UsernameArgId)
+            val userName = backStackEntry.arguments?.getString(AuthDestination.Email.UsernameArgId)
             checkNotNull(userName)
             val parentEntry = remember(backStackEntry) {
-                navController.getBackStackEntry(AuthScreen.SignUp.route)
+                navController.getBackStackEntry(AuthDestination.SignUp.route)
             }
             val viewModel = hiltViewModel<SignUpFormViewModel>(parentEntry)
             EmailRoute(
@@ -70,10 +70,10 @@ fun NavGraphBuilder.authNavGraph(
             )
         }
         composable(
-            route = AuthScreen.Password.route
+            route = AuthDestination.Password.route
         ) { backStackEntry ->
             val parentEntry = remember(backStackEntry) {
-                navController.getBackStackEntry(AuthScreen.SignUp.route)
+                navController.getBackStackEntry(AuthDestination.SignUp.route)
             }
             val viewModel = hiltViewModel<SignUpFormViewModel>(parentEntry)
             PasswordRoute(
@@ -83,10 +83,10 @@ fun NavGraphBuilder.authNavGraph(
             )
         }
         composable(
-            route = AuthScreen.Birthday.route
+            route = AuthDestination.Birthday.route
         ) { backStackEntry ->
             val parentEntry = remember(backStackEntry) {
-                navController.getBackStackEntry(AuthScreen.SignUp.route)
+                navController.getBackStackEntry(AuthDestination.SignUp.route)
             }
             val viewModel = hiltViewModel<SignUpFormViewModel>(parentEntry)
             BirthdayRoute(
@@ -96,7 +96,7 @@ fun NavGraphBuilder.authNavGraph(
             )
         }
         composable(
-            route = AuthScreen.Login.route
+            route = AuthDestination.Login.route
         ) {
             LoginRoute(
                 navigateToSignUp = navController::popBackStack,
@@ -104,7 +104,7 @@ fun NavGraphBuilder.authNavGraph(
             )
         }
         composable(
-            route = AuthScreen.LoginForm.route
+            route = AuthDestination.LoginForm.route
         ) {
             val viewModel = hiltViewModel<LoginFormViewModel>()
             LoginFormRoute(
@@ -116,50 +116,50 @@ fun NavGraphBuilder.authNavGraph(
     }
 }
 
-sealed class AuthScreen(val route: String) {
-    object SignUp : AuthScreen("signUp")
-    object Username : AuthScreen("username")
-    object Email : AuthScreen("email/{username}") {
+sealed class AuthDestination(val route: String) {
+    object SignUp : AuthDestination("signUp")
+    object Username : AuthDestination("username")
+    object Email : AuthDestination("email/{username}") {
         const val UsernameArgId = "username"
         fun createRoute(username: String) = "email/$username"
     }
 
-    object Password : AuthScreen("password")
-    object Birthday : AuthScreen("birthday")
-    object Login : AuthScreen("login")
-    object LoginForm : AuthScreen("loginForm")
+    object Password : AuthDestination("password")
+    object Birthday : AuthDestination("birthday")
+    object Login : AuthDestination("login")
+    object LoginForm : AuthDestination("loginForm")
 }
 
 fun NavController.navigateToLogin() {
-    navigate(AuthScreen.Login.route)
+    navigate(AuthDestination.Login.route)
 }
 
 fun NavController.navigateToUserName() {
-    navigate(AuthScreen.Username.route)
+    navigate(AuthDestination.Username.route)
 }
 
 fun NavController.navigateToEmail(username: String) {
-    navigate(AuthScreen.Email.createRoute(username))
+    navigate(AuthDestination.Email.createRoute(username))
 }
 
 fun NavController.navigateToPassword() {
-    navigate(AuthScreen.Password.route)
+    navigate(AuthDestination.Password.route)
 }
 
 fun NavController.navigateToBirthday() {
-    navigate(AuthScreen.Birthday.route)
+    navigate(AuthDestination.Birthday.route)
 }
 
 fun NavController.navigateToOnboarding() {
-    navigate(TikTokNavGraph.Onboarding.route)
+    navigate(TikTokDestination.Onboarding.route)
 }
 
 fun NavController.navigateToLoginForm() {
-    navigate(AuthScreen.LoginForm.route)
+    navigate(AuthDestination.LoginForm.route)
 }
 
 fun NavController.navigateToMain() {
-    navigate(TikTokNavGraph.Main.route) {
+    navigate(TikTokDestination.Main.route) {
         popUpTo(graph.findStartDestination().id) {
             inclusive = true
         }
