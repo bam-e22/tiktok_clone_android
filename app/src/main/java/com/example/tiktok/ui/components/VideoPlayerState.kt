@@ -4,24 +4,25 @@ import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import com.example.tiktok.delegate.VideoPlayerDelegate
+import com.example.tiktok.model.PlayerState
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Inject
 
-@UnstableApi
 @Stable
 class VideoPlayerState @Inject constructor(
     private val delegate: VideoPlayerDelegate,
 ) {
-    val playerState @Composable get() = delegate.playerState.collectAsStateWithLifecycle()
+    val playerState: State<PlayerState> @Composable get() = delegate.playerState.collectAsStateWithLifecycle()
     val player: Player get() = delegate.exoPlayer
     fun prepare(uri: Uri) = delegate.prepare(uri)
     fun play() = delegate.play()

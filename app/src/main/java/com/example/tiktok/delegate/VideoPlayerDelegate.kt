@@ -4,7 +4,6 @@ import android.content.Context
 import android.net.Uri
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
-import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import com.example.tiktok.domain.di.IoDispatcher
 import com.example.tiktok.model.PlayerState
@@ -15,11 +14,9 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-@UnstableApi
 class VideoPlayerDelegate @Inject constructor(
     @ApplicationContext context: Context,
     @IoDispatcher ioDispatcher: CoroutineDispatcher,
@@ -34,7 +31,7 @@ class VideoPlayerDelegate @Inject constructor(
     private val listener = object : Player.Listener {
         override fun onPlaybackStateChanged(playbackState: Int) {
             launch {
-                when(playbackState) {
+                when (playbackState) {
                     Player.STATE_IDLE -> _playerState.emit(PlayerState.IDLE)
                     Player.STATE_BUFFERING -> _playerState.emit(PlayerState.BUFFERING)
                     else -> _playerState.emit(PlayerState.READY)
