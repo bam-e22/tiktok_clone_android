@@ -6,10 +6,5 @@
         <option value="$PROJECT_DIR$/config/detekt/detekt.yml" />
       </list>
     </option>
-    <option name="pluginJars">
-      <list>
-        <option value="$PROJECT_DIR$/config/detekt/detekt-twitter-compose-0.0.26-all.jar" />
-      </list>
-    </option>
   </component>
 </project>
