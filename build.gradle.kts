@@ -27,3 +27,7 @@ tasks.register<Detekt>("detektAll") {
     exclude(resourceFiles, buildFiles)
     basePath = rootProject.projectDir.absolutePath
 }
+
+dependencies {
+    detektPlugins(libs.detekt.compose.rule)
+}

@@ -1,5 +1,6 @@
 [versions]
 compileSdk = "33"
+detekt = "0.0.26"
 targetSdk = "33"
 minSdk = "26"
 agp = "8.0.2"
@@ -33,6 +34,7 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.0" }
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+detekt-compose-rule = { module = "com.twitter.compose.rules:detekt", version.ref = "detekt" }
 material3 = { group = "androidx.compose.material3", name = "material3" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
