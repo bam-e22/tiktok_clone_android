@@ -25,4 +25,5 @@ tasks.register<Detekt>("detektAll") {
     config.setFrom(configFile)
     include(kotlinFiles)
     exclude(resourceFiles, buildFiles)
+    basePath = rootProject.projectDir.absolutePath
 }
