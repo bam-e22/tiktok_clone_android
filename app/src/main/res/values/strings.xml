@@ -3,4 +3,5 @@
     <string name="cd_navigate_back">뒤로</string>
     <string name="sign_up">Sign up</string>
     <string name="log_in">Log in</string>
+    <string name="cd_favorite">공감</string>
 </resources>
