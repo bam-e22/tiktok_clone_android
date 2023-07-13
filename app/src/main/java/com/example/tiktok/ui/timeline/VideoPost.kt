@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.tiktok.R
 import com.example.tiktok.model.VideoItem
+import com.example.tiktok.ui.components.CircleAvatar
 import com.example.tiktok.ui.components.VideoPlayer
 import com.example.tiktok.ui.utils.Sizes
 
@@ -93,20 +94,26 @@ private fun VideoSnsButtons(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        CircleAvatar(
+            uid = "",
+            name = "",
+        )
+        Spacer(modifier = Modifier.height(20.dp))
         SnsButton(
             imageVector = Icons.Filled.Favorite,
             text = "0",
             onClick = {}
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(20.dp))
         SnsButton(
             imageVector = Icons.Outlined.ChatBubbleOutline,
             text = "0",
             onClick = {}
         )
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(20.dp))
         SnsButton(
             imageVector = Icons.Filled.Send,
             text = "Share",
@@ -131,13 +138,13 @@ private fun SnsButton(
             onClick = onClick
         ) {
             Icon(
-                modifier = Modifier.size(Sizes.ExtraLargeIconSize),
+                modifier = Modifier.size(Sizes.LargeIconSize),
                 imageVector = imageVector,
                 tint = Color.White,
                 contentDescription = stringResource(id = R.string.cd_favorite)
             )
         }
-        Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(1.dp))
         Text(
             text = text,
             style = MaterialTheme.typography.labelLarge.copy(color = Color.White),
