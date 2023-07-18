@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -36,12 +37,15 @@ fun TutorialRoute(
 private fun TutorialScreen(
     navigateToMain: () -> Unit,
 ) {
+    val pagerState = rememberPagerState {
+        2
+    }
     Scaffold(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.background)
     ) {
         HorizontalPager(
-            pageCount = 2
+            state = pagerState
         ) { page ->
             when (page) {
                 0 -> {

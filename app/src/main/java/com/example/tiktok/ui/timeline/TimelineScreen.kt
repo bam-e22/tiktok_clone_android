@@ -8,6 +8,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.VerticalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
@@ -60,16 +61,19 @@ private fun TimelineScreen(
         refreshing = refreshing,
         onRefresh = onRefresh
     )
+    val pagerState = rememberPagerState {
+        videoItems.size
+    }
 
     Scaffold {
         Box(
             modifier = Modifier.pullRefresh(refreshState)
         ) {
             VerticalPager(
+                state = pagerState,
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.Black),
-                pageCount = videoItems.size,
                 key = { it }
             ) { index ->
                 VideoPost(
