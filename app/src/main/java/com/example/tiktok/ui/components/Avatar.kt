@@ -20,15 +20,24 @@ import com.example.tiktok.ui.utils.Sizes
 fun CircleAvatar(
     uid: String,
     name: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    drawBorder: Boolean = false
 ) {
+    val avatarModifier = modifier
+        .size(Sizes.LargeIconSize)
+        .clip(CircleShape)
+
+    if (drawBorder) {
+        avatarModifier.then(
+            Modifier
+                .border(BorderStroke(1.dp, Color.White), CircleShape)
+                .padding(1.dp)
+        )
+    }
+
     AsyncImage(
         contentScale = ContentScale.Crop,
-        modifier = modifier
-            .size(Sizes.LargeIconSize)
-            .border(BorderStroke(1.dp, Color.White), CircleShape)
-            .padding(1.dp)
-            .clip(CircleShape),
+        modifier = avatarModifier,
         model = "https://avatars.githubusercontent.com/u/23008504?s=400&u=d46c78c9cd10e3f3b196543cd0e641e551740a3b&v=4",
         contentDescription = stringResource(id = R.string.cd_avatar, name),
     )

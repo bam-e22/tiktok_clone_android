@@ -2,7 +2,6 @@ package com.example.tiktok.ui.timeline
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -38,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import com.example.tiktok.R
 import com.example.tiktok.model.VideoItem
 import com.example.tiktok.ui.components.CircleAvatar
+import com.example.tiktok.ui.components.Comment
 import com.example.tiktok.ui.components.SnsButton
 import com.example.tiktok.ui.components.VideoPlayer
 import com.example.tiktok.ui.utils.Sizes
@@ -61,7 +61,7 @@ fun VideoPost(
             }
         ) {
             VideoComments(
-                comments = comments,
+                comments = listOf("", "", ""),
                 onClose = {
                     showSheet = false
                 }
@@ -163,23 +163,9 @@ private fun VideoSnsButtons(
     }
 }
 
-val comments = listOf(
-    Pair("United States", "\uD83C\uDDFA\uD83C\uDDF8"),
-    Pair("Canada", "\uD83C\uDDE8\uD83C\uDDE6"),
-    Pair("India", "\uD83C\uDDEE\uD83C\uDDF3"),
-    Pair("Germany", "\uD83C\uDDE9\uD83C\uDDEA"),
-    Pair("France", "\uD83C\uDDEB\uD83C\uDDF7"),
-    Pair("Japan", "\uD83C\uDDEF\uD83C\uDDF5"),
-    Pair("China", "\uD83C\uDDE8\uD83C\uDDF3"),
-    Pair("Brazil", "\uD83C\uDDE7\uD83C\uDDF7"),
-    Pair("Australia", "\uD83C\uDDE6\uD83C\uDDFA"),
-    Pair("Russia", "\uD83C\uDDF7\uD83C\uDDFA"),
-    Pair("United Kingdom", "\uD83C\uDDEC\uD83C\uDDE7"),
-)
-
 @Composable
 private fun VideoComments(
-    comments: List<Pair<String, String>>,
+    comments: List<String>,
     modifier: Modifier = Modifier,
     onClose: () -> Unit
 ) {
@@ -208,18 +194,15 @@ private fun VideoComments(
             }
         }
         LazyColumn {
-            items(comments) { (country, flag) ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 10.dp, horizontal = 20.dp)
-                ) {
-                    Text(
-                        text = flag,
-                        modifier = Modifier.padding(end = 20.dp)
-                    )
-                    Text(text = country)
-                }
+            items(comments) {
+                Comment(
+                    creatorUid = "",
+                    creatorName = "Meggin",
+                    comment = "Put the pickpocket sound over this!!!",
+                    createdAt = 1409392,
+                    likes = 625000,
+                    dislikes = 0
+                )
             }
         }
     }
