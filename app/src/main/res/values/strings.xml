@@ -5,4 +5,5 @@
     <string name="log_in">Log in</string>
     <string name="cd_favorite">공감</string>
     <string name="cd_avatar">%s 아바타</string>
+    <string name="cd_close">닫기</string>
 </resources>
