@@ -1,5 +1,8 @@
 package com.example.tiktok.ui.timeline
 
+import android.annotation.SuppressLint
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +16,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,8 +40,10 @@ import com.example.tiktok.R
 import com.example.tiktok.model.VideoItem
 import com.example.tiktok.ui.components.CircleAvatar
 import com.example.tiktok.ui.components.Comment
+import com.example.tiktok.ui.components.CommentInputPanel
 import com.example.tiktok.ui.components.SnsButton
 import com.example.tiktok.ui.components.VideoPlayer
+import com.example.tiktok.ui.theme.Grey200
 import com.example.tiktok.ui.utils.Sizes
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -161,6 +167,8 @@ private fun VideoSnsButtons(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 private fun VideoComments(
     comments: List<String>,
@@ -170,38 +178,52 @@ private fun VideoComments(
     Column(
         modifier = modifier.fillMaxSize()
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp),
+        LazyColumn(
+            modifier = Modifier.weight(1f)
         ) {
-            Text(
-                "댓글 ${comments.size}개",
-                modifier = Modifier.align(Alignment.Center),
-                style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold)
-            )
-            IconButton(
-                modifier = Modifier.align(Alignment.CenterEnd),
-                onClick = onClose
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.Close,
-                    modifier = Modifier.size(Sizes.extraSmallIconSize),
-                    contentDescription = stringResource(id = R.string.cd_close)
-                )
+            stickyHeader {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(MaterialTheme.colorScheme.background)
+                        .padding(horizontal = 20.dp),
+                ) {
+                    Text(
+                        "댓글 ${comments.size}개",
+                        modifier = Modifier.align(Alignment.Center),
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold)
+                    )
+                    IconButton(
+                        modifier = Modifier.align(Alignment.CenterEnd),
+                        onClick = onClose
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Close,
+                            modifier = Modifier.size(Sizes.ExtraSmallIconSize),
+                            contentDescription = stringResource(id = R.string.cd_close)
+                        )
+                    }
+                }
             }
-        }
-        LazyColumn {
-            items(10) {
+            items(8) {
                 Comment(
                     creatorUid = "",
                     creatorName = "Meggin",
                     comment = "Put the pickpocket sound over this!!!",
                     createdAt = 1409392,
                     likes = 625000,
-                    dislikes = 0
+                    dislikes = 0,
+                    modifier = Modifier.background(MaterialTheme.colorScheme.background)
                 )
             }
         }
+        Divider(
+            modifier = Modifier.fillMaxWidth(),
+            thickness = 1.dp,
+            color = Grey200
+        )
+        CommentInputPanel(
+            creatorUid = "",
+        )
     }
 }

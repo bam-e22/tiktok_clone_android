@@ -103,7 +103,7 @@ private fun PasswordScreen(
             Spacer(modifier = Modifier.height(10.dp))
             Row {
                 Icon(
-                    modifier = Modifier.size(Sizes.extraSmallIconSize),
+                    modifier = Modifier.size(Sizes.ExtraSmallIconSize),
                     painter = painterResource(id = R.drawable.circle_check),
                     contentDescription = null,
                     tint = if (validatePassword(textFieldValue.text)) Green500 else Grey400

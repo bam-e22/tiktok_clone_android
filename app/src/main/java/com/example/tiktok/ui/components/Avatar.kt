@@ -11,6 +11,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.tiktok.R
@@ -20,11 +21,12 @@ import com.example.tiktok.ui.utils.Sizes
 fun CircleAvatar(
     uid: String,
     name: String,
+    size: Dp = Sizes.LargeIconSize,
     modifier: Modifier = Modifier,
     drawBorder: Boolean = false
 ) {
     val avatarModifier = modifier
-        .size(Sizes.LargeIconSize)
+        .size(size)
         .clip(CircleShape)
 
     if (drawBorder) {
