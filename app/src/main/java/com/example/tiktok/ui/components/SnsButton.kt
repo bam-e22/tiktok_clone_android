@@ -12,7 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.tiktok.R
@@ -21,6 +23,22 @@ import com.example.tiktok.ui.utils.Sizes
 @Composable
 fun SnsButton(
     imageVector: ImageVector,
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val painter = rememberVectorPainter(image = imageVector)
+    SnsButton(
+        painter = painter,
+        text = text,
+        onClick = onClick,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun SnsButton(
+    painter: Painter,
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -34,7 +52,7 @@ fun SnsButton(
         ) {
             Icon(
                 modifier = Modifier.size(Sizes.LargeIconSize),
-                imageVector = imageVector,
+                painter = painter,
                 tint = Color.White,
                 contentDescription = stringResource(id = R.string.cd_favorite)
             )
