@@ -18,7 +18,7 @@ import com.example.tiktok.ui.components.MainNavigationBar
 fun TikTokNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = TikTokDestination.Auth.route,
+    startDestination: String = TopLevelDestination.Auth.route,
 ) {
     Scaffold(
         modifier
@@ -28,7 +28,7 @@ fun TikTokNavGraph(
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             val parentRoute = navBackStackEntry?.destination?.parent?.route
 
-            if (parentRoute == TikTokDestination.Main.route) {
+            if (parentRoute == TopLevelDestination.Main.route) {
                 MainNavigationBar(navController)
             }
         }
@@ -48,8 +48,8 @@ fun TikTokNavGraph(
     }
 }
 
-sealed class TikTokDestination(val route: String) {
-    object Auth : TikTokDestination("authGraph")
-    object Onboarding : TikTokDestination("onboardingGraph")
-    object Main : TikTokDestination("mainGraph")
+sealed class TopLevelDestination(val route: String) {
+    object Auth : TopLevelDestination("authGraph")
+    object Onboarding : TopLevelDestination("onboardingGraph")
+    object Main : TopLevelDestination("mainGraph")
 }

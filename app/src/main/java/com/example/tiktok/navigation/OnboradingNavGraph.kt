@@ -11,7 +11,7 @@ fun NavGraphBuilder.onboardingNavGraph(
     navController: NavController,
 ) {
     navigation(
-        route = TikTokDestination.Onboarding.route,
+        route = TopLevelDestination.Onboarding.route,
         startDestination = OnboardingDestination.Interest.route
     ) {
         composable(

@@ -28,7 +28,7 @@ fun NavGraphBuilder.mainNavGraph(
     navController: NavController,
 ) {
     navigation(
-        route = TikTokDestination.Main.route,
+        route = TopLevelDestination.Main.route,
         startDestination = MainDestination.BottomNavigation.VideoTimeline.route
     ) {
         composable(
@@ -58,17 +58,17 @@ fun NavGraphBuilder.mainNavGraph(
             route = MainDestination.BottomNavigation.Profile.route
         ) {
             ProfileRoute(
-                navigateToSettings = navController::navigateToEtc
+                navigateToSettings = navController::navigateToSetting
             )
         }
 
-        etcNavGraph(navController)
+        settingNavGraph(navController)
     }
 }
 
 sealed class MainDestination(val route: String) {
 
-    object Etc : MainDestination("etc")
+    object Setting : MainDestination("setting")
 
     sealed class BottomNavigation(
         route: String,
@@ -114,13 +114,13 @@ sealed class MainDestination(val route: String) {
 }
 
 fun NavController.navigateToSignUp() {
-    navigate(TikTokDestination.Auth.route)
+    navigate(TopLevelDestination.Auth.route)
 }
 
-fun NavController.navigateToEtc() {
-    navigate(MainDestination.Etc.route)
+fun NavController.navigateToSetting() {
+    navigate(MainDestination.Setting.route)
 }
 
 fun NavController.navigateToAuth() {
-    navigate(TikTokDestination.Auth.route)
+    navigate(TopLevelDestination.Auth.route)
 }

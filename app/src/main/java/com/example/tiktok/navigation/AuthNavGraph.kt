@@ -23,7 +23,7 @@ fun NavGraphBuilder.authNavGraph(
     navController: NavController,
 ) {
     navigation(
-        route = TikTokDestination.Auth.route,
+        route = TopLevelDestination.Auth.route,
         startDestination = AuthDestination.SignUp.route
     ) {
         composable(
@@ -151,7 +151,7 @@ fun NavController.navigateToBirthday() {
 }
 
 fun NavController.navigateToOnboarding() {
-    navigate(TikTokDestination.Onboarding.route)
+    navigate(TopLevelDestination.Onboarding.route)
 }
 
 fun NavController.navigateToLoginForm() {
@@ -159,7 +159,7 @@ fun NavController.navigateToLoginForm() {
 }
 
 fun NavController.navigateToMain() {
-    navigate(TikTokDestination.Main.route) {
+    navigate(TopLevelDestination.Main.route) {
         popUpTo(graph.findStartDestination().id) {
             inclusive = true
         }

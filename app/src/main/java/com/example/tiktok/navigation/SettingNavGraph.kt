@@ -8,15 +8,15 @@ import androidx.navigation.navigation
 import com.example.tiktok.ui.setting.SettingRoute
 import com.example.tiktok.ui.setting.viewmodel.SettingViewModel
 
-fun NavGraphBuilder.etcNavGraph(
+fun NavGraphBuilder.settingNavGraph(
     navController: NavController
 ) {
     navigation(
-        route = MainDestination.Etc.route,
-        startDestination = EtcDestination.Settings.route
+        route = MainDestination.Setting.route,
+        startDestination = SettingDestination.Settings.route
     ) {
         composable(
-            route = EtcDestination.Settings.route
+            route = SettingDestination.Settings.route
         ) {
             val viewModel = hiltViewModel<SettingViewModel>()
             SettingRoute(
@@ -28,6 +28,6 @@ fun NavGraphBuilder.etcNavGraph(
     }
 }
 
-sealed class EtcDestination(val route: String) {
-    object Settings: EtcDestination("settings")
+sealed class SettingDestination(val route: String) {
+    object Settings: SettingDestination("settings")
 }
