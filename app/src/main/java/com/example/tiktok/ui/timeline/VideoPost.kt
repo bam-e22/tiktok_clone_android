@@ -45,6 +45,8 @@ import com.example.tiktok.ui.components.SnsButton
 import com.example.tiktok.ui.components.VideoPlayer
 import com.example.tiktok.ui.theme.Grey200
 import com.example.tiktok.ui.utils.Sizes
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -65,7 +67,7 @@ fun VideoPost(
             }
         ) {
             VideoComments(
-                comments = emptyList(),
+                comments = persistentListOf(),
                 onClose = {
                     showSheet = false
                 }
@@ -171,7 +173,7 @@ private fun VideoSnsButtons(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 private fun VideoComments(
-    comments: List<String>,
+    comments: ImmutableList<String>,
     modifier: Modifier = Modifier,
     onClose: () -> Unit
 ) {

@@ -21,6 +21,7 @@ hilt = "2.45"
 hilt-navigation-compose = "1.0.0"
 media3 = "1.1.0"
 coil = "2.4.0"
+kotlinx-collections = "0.3.5"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -54,6 +55,8 @@ navigation-compose = { module = "androidx.navigation:navigation-compose", versio
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
 
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
+kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinx-collections" }
 
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }

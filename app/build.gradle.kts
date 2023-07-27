@@ -77,6 +77,8 @@ dependencies {
 
     implementation(libs.coil.compose)
 
+    implementation(libs.kotlinx.collections.immutable)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
