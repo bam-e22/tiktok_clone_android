@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tiktok.model.VideoItem
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,9 +15,6 @@ class TimelineViewModel @Inject constructor(
 ) : ViewModel() {
     private val _videoItems = MutableStateFlow<List<VideoItem>>(emptyList())
     val videoItems: StateFlow<List<VideoItem>> = _videoItems.asStateFlow()
-
-    private val _refreshing = MutableStateFlow(false)
-    val refreshing: StateFlow<Boolean> = _refreshing.asStateFlow()
 
     init {
         fetchVideoItems()
@@ -41,14 +37,6 @@ class TimelineViewModel @Inject constructor(
         )
         viewModelScope.launch {
             _videoItems.emit(dummy)
-        }
-    }
-
-    fun refresh() {
-        viewModelScope.launch {
-            _refreshing.emit(true)
-            delay(1500)
-            _refreshing.emit(false)
         }
     }
 }

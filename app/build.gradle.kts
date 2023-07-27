@@ -64,7 +64,6 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.ui.material.icon.extended)
     implementation(libs.material3)
-    implementation(libs.material) // for pullRefresh
     implementation(libs.navigation.compose)
     implementation(libs.hilt.navigation.compose)
     implementation(libs.timber)
